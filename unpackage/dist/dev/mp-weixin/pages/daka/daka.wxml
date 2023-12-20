@@ -1,0 +1,1 @@
+<view><view class="sentenceContainer">别卷了，快点回去睡觉</view><view class="dakaSuccessContainer"><view>{{"你已经在今日"+hour+"打卡成功"}}</view></view><view class="dakaSuccessContainer"><view>{{"你是今天第"+rank+"个打卡的人"}}</view></view><view class="dakaSuccessContainer"><view>{{"你已经成功击败了"+percent+"%的人"}}</view></view></view>

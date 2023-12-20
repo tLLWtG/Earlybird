@@ -1,0 +1,33 @@
+@charset "UTF-8";
+/* 水平间距 */
+/* 水平间距 */
+.imageContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 100rpx;
+  margin-bottom: 0rpx;
+  margin: 100rpx auto 50rpx auto;
+  width: 750rpx;
+  height: 300rpx;
+}
+.imageContainer image {
+  height: 200rpx;
+  width: 200rpx;
+}
+.inputContianer {
+  display: flex;
+  flex-direction: column;
+  width: 650rpx;
+  margin: 0 auto;
+}
+.inputContianer .inputs {
+  width: 650rpx;
+  height: 50rpx;
+  margin-bottom: 20rpx;
+}
+.logInButton {
+  width: 400rpx;
+  height: 100rpx;
+  margin: 0 auto;
+}
+

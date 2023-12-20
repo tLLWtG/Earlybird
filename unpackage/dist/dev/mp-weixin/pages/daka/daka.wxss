@@ -1,0 +1,26 @@
+
+.sentenceContainer{
+	border: 2rpx solid #000000;
+	border-radius: 10rpx;
+	height:500rpx;
+	width: 742rpx;
+	
+	line-height: 140rpx;
+	text-align: center;
+	font-size: 50rpx;
+}
+.dakaSuccessContainer{
+	width:742rpx;
+	height:200rpx;
+	
+	margin:25rpx auto;
+	
+	line-height: 200rpx;
+	text-align: center;
+	font-size: 50rpx;
+	
+	border: 2rpx solid black;
+	border-radius: 10rpx;
+}
+
+
