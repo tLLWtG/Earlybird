@@ -157,16 +157,61 @@ exports.default = void 0;
 //
 //
 //
-//
-//
-//
+
+function getDate() {
+  var date = new Date();
+  var year = date.getFullYear();
+  var month = String(date.getMonth() + 1).padStart(2, '0');
+  var day = String(date.getDate()).padStart(2, '0');
+  return "".concat(year, "-").concat(month, "-").concat(day);
+}
+function hashFunc(str, mod) {
+  var hashCode = 0;
+  for (var i = 0; i < str.length; i++) {
+    hashCode = 233 * hashCode + str.charCodeAt(i);
+  }
+  var res = hashCode % mod;
+  return res;
+}
 var _default = {
   data: function data() {
     return {
       screenHeight: '',
       luckActive: 1,
-      qiuQianRecords: []
+      qiuQianRecords: [],
+      good: ["赶作业: 很快就能补完啦", "翘课: 不会被老师发现", "抽卡: 一发入魂", "放假: 自由自在的一个假期", "熬夜: 事情终究可以完成的", "查成绩: 春风得意马蹄疾，一日看尽长安花", "聊天: 能和人分享喜悦，露出最真实的一面吧", "刷题: 一遍过样例", "去食堂: 给了双倍的量", "体育锻炼: 身体棒棒哒", "写作文: 匆匆枯笔梦生花", "听课: 100% 消化", "卷: 感觉能做到的话，请务必坚持下来", "重构代码: 代码质量明显提高", "睡觉: 养足精力，明日再战", "看风景: 良辰美景，赏心乐事", "摸鱼: 不去着急的话，便又是一帆风顺的一天", "点外卖: 及时送到"],
+      bad: ["写作文: 不知所云，离题万里", "直播写代码: CE, RE and T，身败名裂", "学数论: 咋看都不会", "吃泡面: 可能会没有调料包", "去食堂: 爱吃的菜刚被打完", "查成绩: 待到秋来九月八，我花开后百花杀", "翘课: 老师点名啦", "膜拜大佬: 被大佬鄙视", "考试: 一上考场就忘光了", "谈恋爱: 考试临头各自飞", "摸鱼: 浪费的时光总是要补回来的", "点外卖: 一直没有送到还不给退款", "装弱: 你太强了", "放假: 就放一天，全是作业", "体育锻炼: 消耗的能量全吃回来了", "熬夜: 爆肝，通宵干不完", "听课: 反正你听不懂", "看风景: 花开花落，再灿烂的星光也会消失"],
+      showadmin: "",
+      showid: "",
+      showname: "",
+      showclass: ""
     };
+  },
+  computed: {
+    jrrp: function jrrp() {
+      var hash = getDate();
+      hash += this.showid;
+      hash = hashFunc(hash, 101);
+      return hash;
+    },
+    yi: function yi() {
+      var hash = getDate();
+      hash += this.showid * 2;
+      hash = hashFunc(hash, this.good.length);
+      return this.good[hash];
+    },
+    ji: function ji() {
+      var hash = getDate();
+      hash += this.showid * 3;
+      hash = hashFunc(hash, this.bad.length);
+      return this.bad[hash];
+    }
+  },
+  onShow: function onShow() {
+    this.showid = uni.getStorageSync("showid");
+    this.showname = uni.getStorageSync("showname");
+    this.showclass = uni.getStorageSync("showclass");
+    this.showadmin = uni.getStorageSync("showadmin");
   },
   methods: {
     formatTime: function formatTime(date) {
