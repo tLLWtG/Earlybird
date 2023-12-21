@@ -1,55 +1,54 @@
 {
-    "description": "项目配置文件。",
-    "packOptions": {
-        "ignore": [],
-        "include": []
-    },
-    "setting": {
-        "urlCheck": false,
-        "es6": false,
-        "postcss": false,
-        "minified": false,
-        "newFeature": true,
-        "bigPackageSizeSupport": true,
-        "babelSetting": {
-            "ignore": [],
-            "disablePlugins": [],
-            "outputPath": ""
-        },
-        "condition": false
-    },
-    "compileType": "miniprogram",
-    "libVersion": "3.2.4",
-    "appid": "touristappid",
-    "projectname": "Earlybird",
-    "condition": {
-        "miniprogram": {
-            "list": [
-                {
-                    "name": "dakaTest",
-                    "pathName": "pages/daka/daka",
-                    "query": ""
-                },
-                {
-                    "name": "qiuqianTest",
-                    "pathName": "pages/qiuqian/qiuqian",
-                    "query": ""
-                },
-                {
-                    "name": "selfDataTest",
-                    "pathName": "pages/selfData/selfData",
-                    "query": ""
-                },
-                {
-                    "name": "totalDataTest",
-                    "pathName": "pages/totalData/totalData",
-                    "query": ""
-                }
-            ]
-        }
-    },
-    "editorSetting": {
-        "tabIndent": "insertSpaces",
-        "tabSize": 4
+  "description": "项目配置文件。",
+  "packOptions": {
+    "ignore": [],
+    "include": []
+  },
+  "setting": {
+    "urlCheck": false,
+    "es6": false,
+    "postcss": false,
+    "minified": false,
+    "newFeature": true,
+    "bigPackageSizeSupport": true,
+    "babelSetting": {
+      "ignore": [],
+      "disablePlugins": [],
+      "outputPath": ""
     }
+  },
+  "compileType": "miniprogram",
+  "libVersion": "3.2.3",
+  "appid": "touristappid",
+  "projectname": "Earlybird",
+  "condition": {
+    "miniprogram": {
+      "list": [
+        {
+          "name": "dakaTest",
+          "pathName": "pages/daka/daka",
+          "query": ""
+        },
+        {
+          "name": "qiuqianTest",
+          "pathName": "pages/qiuqian/qiuqian",
+          "query": ""
+        },
+        {
+          "name": "selfDataTest",
+          "pathName": "pages/selfData/selfData",
+          "query": ""
+        },
+        {
+          "name": "totalDataTest",
+          "pathName": "pages/totalData/totalData",
+          "query": ""
+        }
+      ]
+    }
+  },
+  "editorSetting": {
+    "tabIndent": "insertSpaces",
+    "tabSize": 2
+  }
 }

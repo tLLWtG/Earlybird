@@ -1,6 +1,12 @@
 @charset "UTF-8";
 /* 水平间距 */
 /* 水平间距 */
+.cont {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+}
 .imageContainer {
   display: flex;
   justify-content: center;
