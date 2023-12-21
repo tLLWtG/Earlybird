@@ -199,7 +199,13 @@ var _default = {
   },
   onShow: function onShow() {
     var loginState = uni.getStorageSync("loginState");
-    if (loginState != "") this.islogin = true;else this.islogin = false;
+    if (loginState != "") {
+      this.islogin = true;
+      this.showid = uni.getStorageSync("showid");
+      this.showname = uni.getStorageSync("showname");
+      this.showadmin = uni.getStorageSync("showadmin");
+      this.showclass = uni.getStorageSync("showclass");
+    } else this.islogin = false;
   },
   methods: {
     onKeyInput1: function onKeyInput1(event) {
@@ -281,7 +287,7 @@ var _default = {
               case 27:
                 uni.showToast({
                   icon: 'error',
-                  title: '学号或密码错误'
+                  title: '账号或密码错误'
                 });
                 _this.islogin = false;
                 uni.setStorageSync("loginState", "");

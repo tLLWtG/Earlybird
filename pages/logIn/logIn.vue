@@ -29,8 +29,8 @@
 			</view>
 		</view>
 		<view class="inputContianer">
-			<view style="margin-bottom: 30rpx;">请输入学号</view>
-			<input class="inputs" @input="onKeyInput1" placeholder="学号" />
+			<view style="margin-bottom: 30rpx;">请输入账号</view>
+			<input class="inputs" @input="onKeyInput1" placeholder="学号/工号" />
 			<view style="margin-bottom: 30rpx;">请输入密码</view>
 			<input class="inputs" @input="onKeyInput2" placeholder="密码" />
 		</view>
@@ -54,7 +54,13 @@
 		onShow() {
 			let loginState = uni.getStorageSync("loginState");
 			if (loginState != "")
+			{
 				this.islogin = true;
+				this.showid = uni.getStorageSync("showid");
+				this.showname = uni.getStorageSync("showname");
+				this.showadmin = uni.getStorageSync("showadmin");
+				this.showclass = uni.getStorageSync("showclass");
+			}
 			else
 				this.islogin = false;
 		},
@@ -115,7 +121,7 @@
 				}
 				uni.showToast({
 					icon: 'error',
-					title: '学号或密码错误'
+					title: '账号或密码错误'
 				});
 				this.islogin = false;
 				uni.setStorageSync("loginState", "");

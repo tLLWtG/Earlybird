@@ -136,12 +136,15 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {
+/* WEBPACK VAR INJECTION */(function(uni, uniCloud) {
 
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
+var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 28));
+var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 31));
 //
 //
 //
@@ -168,38 +171,89 @@ var _default = {
       }, {
         text: '平均早起时间',
         val: 0
-      }]
+      }],
+      record: []
     };
   },
-  methods: {},
-  onLoad: function onLoad() {
-    //导入求签打卡记录
-    var qiuQianRecord = uni.getStorageSync('qiuQianInfo') || [];
-    var dakaRecord = uni.getStorageSync('dakaInfo') || [];
-    //计算今天是今年的第几天，以及累计打卡天数
-    var now = new Date();
-    var firstDay = new Date(now.getFullYear(), 0, 1);
-    var passedDays = Math.ceil((now - firstDay) / (1000 * 60 * 60 * 24));
-    var dakaDays = dakaRecord.length;
-    //修改缺勤次数，功德量和缺勤率
-    this.selfData[0].val = passedDays - dakaDays;
-    this.selfData[1].val = qiuQianRecord.length;
-    this.selfData[2].val = ((passedDays - dakaDays) * 100 / passedDays).toFixed(1).toString() + '%';
-    //计算平均早起时间
-    var averageTime = 0;
-    console.log(dakaRecord[0].substr(11, 1));
-    for (var i = 0; i < dakaRecord.length; i++) {
-      var hour = parseInt(dakaRecord[i].substr(11, 1)) * 10 + parseInt(dakaRecord[i].substr(12, 1));
-      var minute = parseInt(dakaRecord[i].substr(14, 1)) * 10 + parseInt(dakaRecord[i].substr(15, 1));
-      averageTime += hour * 60 + minute;
+  methods: {
+    ababa: function ababa() {
+      //导入求签打卡记录
+      var qiuQianRecord = uni.getStorageSync('qiuQianInfo') || [];
+      var dakaRecord = uni.getStorageSync('dakaInfo') || [];
+      //计算今天是今年的第几天，以及累计打卡天数
+      var now = new Date();
+      var firstDay = new Date(now.getFullYear(), 0, 1);
+      var passedDays = Math.ceil((now - firstDay) / (1000 * 60 * 60 * 24));
+      var dakaDays = dakaRecord.length;
+      //修改缺勤次数，功德量和缺勤率
+      this.selfData[0].val = passedDays - dakaDays;
+      this.selfData[1].val = qiuQianRecord.length;
+      this.selfData[2].val = ((passedDays - dakaDays) * 100 / passedDays).toFixed(1).toString() + '%';
+      //计算平均早起时间
+      var averageTime = 0;
+      console.log(dakaRecord[0].substr(11, 1));
+      for (var i = 0; i < dakaRecord.length; i++) {
+        var hour = parseInt(dakaRecord[i].substr(11, 1)) * 10 + parseInt(dakaRecord[i].substr(12, 1));
+        var minute = parseInt(dakaRecord[i].substr(14, 1)) * 10 + parseInt(dakaRecord[i].substr(15, 1));
+        averageTime += hour * 60 + minute;
+      }
+      var averageHour = Math.floor(averageTime / 60);
+      var averageMinute = averageTime - averageHour * 60;
+      this.selfData[3].val = averageHour.toString() + ':' + averageMinute.toString();
+    },
+    updateRecord: function updateRecord() {
+      var _this = this;
+      return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee() {
+        var db, res, isSuccess, data, classSize, Count, now, formatdate, formattime, i, record;
+        return _regenerator.default.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                db = uniCloud.database();
+                _context.next = 3;
+                return db.collection('checkrecord').get();
+              case 3:
+                res = _context.sent;
+                isSuccess = res.success;
+                data = res.result.data;
+                if (isSuccess) {
+                  _context.next = 9;
+                  break;
+                }
+                uni.showToast({
+                  icon: 'error',
+                  title: '网络错误！'
+                });
+                return _context.abrupt("return");
+              case 9:
+                console.log(data);
+                classSize = uni.getStorageSync('classsize');
+                Count = 0;
+                now = new Date();
+                formatdate = _this.formatTime(now).substr(0, 10);
+                formattime = _this.formatTime(now).substr(11, 5);
+                for (i = 0; i < data.length; i += 1) {
+                  record = data[i];
+                  if (record.date == formatdate && formattime >= record.time) ++doneCount;
+                }
+                _this.rank = doneCount;
+                _this.percent = doneCount / classSize * 100;
+              case 18:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
     }
-    var averageHour = Math.floor(averageTime / 60);
-    var averageMinute = averageTime - averageHour * 60;
-    this.selfData[3].val = averageHour.toString() + ':' + averageMinute.toString();
+  },
+  onShow: function onShow() {
+    this.updateRecord();
+    this.ababa();
   }
 };
 exports.default = _default;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"], __webpack_require__(/*! ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/uni-cloud/dist/index.js */ 27)["default"]))
 
 /***/ }),
 

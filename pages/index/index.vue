@@ -87,7 +87,7 @@
 
 		line-height: 200rpx;
 		font-size: 150rpx;
-		text-align: left;
+		text-align: center;
 	}
 
 	.subtitle {
