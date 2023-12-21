@@ -1,7 +1,14 @@
 <template>
 	<view>
 		<view class="title">每日打卡</view>
-		<view class="subtitle">开卷开卷开卷开卷开卷开卷开卷开卷开卷开卷</view>
+		<view class="subtitle">
+			<view class="" style="text-align: center;">
+				{{hitokoto}}
+			</view>
+			<view class="" style="text-align: center; margin-top: 20rpx;">
+				from: {{hitokotoFrom}}
+			</view>
+		</view>
 		<view v-if="!islogin">
 			<view style="text-align: center;">请登录后再打卡</view>
 		</view>
@@ -40,10 +47,21 @@
 				showadmin: "",
 				showid: "",
 				showname: "",
-				showclass: ""
+				showclass: "",
+				hitokoto: "hitokoto :D 获取中...",
+				hitokotoFrom: ""
 			}
 		},
 		onShow() {
+			wx.request({
+				url: 'https://v1.hitokoto.cn?c=a&c=d&c=i&c=k',
+				method: 'GET',
+				success: (res) => {
+					console.log(res.data);
+					this.hitokoto = res.data.hitokoto;
+					this.hitokotoFrom = res.data.from;
+				}
+			})
 			let loginState = uni.getStorageSync("loginState");
 			if (loginState != "") {
 				this.islogin = true;
@@ -118,7 +136,7 @@
 
 	.subtitle {
 		width: 650rpx;
-		height: 50rpx;
+		height: 150rpx;
 
 		margin: 50rpx auto;
 

@@ -136,12 +136,19 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {
+/* WEBPACK VAR INJECTION */(function(wx, uni) {
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -181,10 +188,22 @@ var _default = {
       showadmin: "",
       showid: "",
       showname: "",
-      showclass: ""
+      showclass: "",
+      hitokoto: "hitokoto :D 获取中...",
+      hitokotoFrom: ""
     };
   },
   onShow: function onShow() {
+    var _this = this;
+    wx.request({
+      url: 'https://v1.hitokoto.cn?c=a&c=d&c=i&c=k',
+      method: 'GET',
+      success: function success(res) {
+        console.log(res.data);
+        _this.hitokoto = res.data.hitokoto;
+        _this.hitokotoFrom = res.data.from;
+      }
+    });
     var loginState = uni.getStorageSync("loginState");
     if (loginState != "") {
       this.islogin = true;
@@ -241,7 +260,7 @@ var _default = {
   }
 };
 exports.default = _default;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/wx.js */ 1)["default"], __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
 

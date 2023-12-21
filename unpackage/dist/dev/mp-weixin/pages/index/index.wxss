@@ -11,7 +11,7 @@
 }
 .subtitle {
 	width: 650rpx;
-	height: 50rpx;
+	height: 150rpx;
 
 	margin: 50rpx auto;
 
