@@ -1,19 +1,19 @@
 
-.dataContainer{
+.dataContainer {
 	display: flex;
 	justify-content: space-around;
 	flex-wrap: wrap;
-	
-	width:742rpx;
+
+	width: 742rpx;
 	height: 500rpx;
-	
-	border: 2rpx solid #000000 ;
+
+	border: 2rpx solid #000000;
 	border-radius: 10rpx;
 }
-.dataContainer .dataBlocks{
+.dataContainer .dataBlocks {
 	width: 340rpx;
-	height:200rpx;
-	
+	height: 200rpx;
+
 	line-height: 100rpx;
 	text-align: center;
 }

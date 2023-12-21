@@ -26,9 +26,9 @@
 		let hashCode = 0;
 		for (var i = 0; i < str.length; i++) {
 			hashCode = 233 * hashCode + str.charCodeAt(i);
+			hashCode %= mod;
 		}
-		let res = hashCode % mod;
-		return res
+		return hashCode;
 	}
 	export default {
 		data() {

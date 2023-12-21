@@ -136,12 +136,21 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {
+/* WEBPACK VAR INJECTION */(function(uni, uniCloud) {
 
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
+var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 28));
+var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 31));
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -163,19 +172,155 @@ var _default = {
       dakaRecords: [],
       hour: '',
       minute: '',
-      rank: 1,
-      percent: 100
+      rank: '加载中',
+      percent: '加载中',
+      showid: ""
     };
   },
-  methods: {},
-  onLoad: function onLoad() {
+  methods: {
+    formatTime: function formatTime(date) {
+      var year = date.getFullYear();
+      var month = String(date.getMonth() + 1).padStart(2, '0');
+      var day = String(date.getDate()).padStart(2, '0');
+      var hours = String(date.getHours()).padStart(2, '0');
+      var minutes = String(date.getMinutes()).padStart(2, '0');
+      return "".concat(year, "-").concat(month, "-").concat(day, " ").concat(hours, ":").concat(minutes);
+    },
+    showToast_1: function showToast_1() {
+      uni.showToast({
+        title: '你已经打过卡了'
+      });
+    },
+    showToast_2: function showToast_2() {
+      uni.showToast({
+        title: '打卡成功'
+      });
+    },
+    update_rank_percen: function update_rank_percen() {
+      var _this = this;
+      return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee() {
+        var db, res, isSuccess, data, classSize, doneCount, now, formatdate, formattime, i, record;
+        return _regenerator.default.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                db = uniCloud.database();
+                _context.next = 3;
+                return db.collection('checkrecord').get();
+              case 3:
+                res = _context.sent;
+                isSuccess = res.success;
+                data = res.result.data;
+                if (isSuccess) {
+                  _context.next = 9;
+                  break;
+                }
+                uni.showToast({
+                  icon: 'error',
+                  title: '网络错误！'
+                });
+                return _context.abrupt("return");
+              case 9:
+                console.log(data);
+                classSize = uni.getStorageSync('classsize');
+                doneCount = 0;
+                now = new Date();
+                formatdate = _this.formatTime(now).substr(0, 10);
+                formattime = _this.formatTime(now).substr(11, 5);
+                for (i = 0; i < data.length; i += 1) {
+                  record = data[i];
+                  if (record.date == formatdate && formattime >= record.time) ++doneCount;
+                }
+                _this.rank = doneCount;
+                _this.percent = doneCount / classSize * 100;
+              case 18:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    },
+    add_record: function add_record() {
+      var _this2 = this;
+      return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee2() {
+        var now, formatdate, formattime, db, res, isSuccess, data;
+        return _regenerator.default.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                now = new Date();
+                formatdate = _this2.formatTime(now).substr(0, 10);
+                formattime = _this2.formatTime(now).substr(11, 5);
+                db = uniCloud.database();
+                _context2.next = 6;
+                return db.collection('checkrecord').add({
+                  "id": _this2.showid,
+                  "date": formatdate,
+                  "time": formattime
+                });
+              case 6:
+                res = _context2.sent;
+                console.log(res);
+                isSuccess = res.success;
+                data = res.result.data;
+                if (isSuccess) {
+                  _context2.next = 13;
+                  break;
+                }
+                uni.showToast({
+                  icon: 'error',
+                  title: '网络错误！'
+                });
+                return _context2.abrupt("return");
+              case 13:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
+    },
+    daka: function daka() {
+      var flag = 1;
+      // 获取当前的日期，用来判断今天是不是已经打过卡了
+      var now = new Date();
+      var format = this.formatTime(now);
+      console.log(format);
+      // 先从本地获取打卡的数据
+      var dakaRecord = uni.getStorageSync('dakaInfo') || [];
+      // 和数组中的日期比较，看看是否已经打过卡了(其实之和数组的第一个元素比也行)
+      //因为unshift是在最前面插入，所以最前面的肯定是最新的日期
+      for (var i = 0; i < dakaRecord.length; i++) {
+        if (format.substr(0, 10) == dakaRecord[i].substr(0, 10)) {
+          this.showToast_1();
+          flag = 0;
+          break;
+        }
+      }
+      //第一次打卡
+      if (flag) {
+        dakaRecord.unshift(format);
+        this.showToast_2();
+        this.add_record();
+      }
+      //将打卡数据传回
+      uni.setStorageSync('dakaInfo', dakaRecord);
+      if (this.rank == '加载中') {
+        this.update_rank_percen();
+      }
+    }
+  },
+  onShow: function onShow() {
+    this.daka();
     this.dakaRecords = uni.getStorageSync('dakaInfo');
-    this.hour = this.dakaRecords[0].substr(10, 12);
+    this.hour = this.dakaRecords[0].substr(11, 5);
     console.log(this.dakaRecords[0].substr(0, 10));
+    this.showid = uni.getStorageSync("showid");
   }
 };
 exports.default = _default;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"], __webpack_require__(/*! ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/uni-cloud/dist/index.js */ 27)["default"]))
 
 /***/ }),
 

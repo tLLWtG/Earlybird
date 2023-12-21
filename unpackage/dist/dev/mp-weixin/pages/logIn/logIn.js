@@ -238,17 +238,18 @@ var _default = {
                 });
                 return _context.abrupt("return");
               case 9:
+                uni.setStorageSync("classsize", data.length - 1);
                 i = 0;
-              case 10:
+              case 11:
                 if (!(i < data.length)) {
-                  _context.next = 26;
+                  _context.next = 27;
                   break;
                 }
                 person = data[i]; // console.log(person);
                 // console.log(person.id);
                 // console.log(person.password);
                 if (!(person.id == _this.id && person.password == _this.password)) {
-                  _context.next = 23;
+                  _context.next = 24;
                   break;
                 }
                 if (person.admin) {
@@ -273,18 +274,18 @@ var _default = {
                 uni.setStorageSync("showname", _this.showname);
                 uni.setStorageSync("showadmin", _this.showadmin);
                 return _context.abrupt("return");
-              case 23:
+              case 24:
                 i += 1;
-                _context.next = 10;
+                _context.next = 11;
                 break;
-              case 26:
+              case 27:
                 uni.showToast({
                   icon: 'error',
                   title: '学号或密码错误'
                 });
                 _this.islogin = false;
                 uni.setStorageSync("loginState", "");
-              case 29:
+              case 30:
               case "end":
                 return _context.stop();
             }

@@ -169,9 +169,9 @@ function hashFunc(str, mod) {
   var hashCode = 0;
   for (var i = 0; i < str.length; i++) {
     hashCode = 233 * hashCode + str.charCodeAt(i);
+    hashCode %= mod;
   }
-  var res = hashCode % mod;
-  return res;
+  return hashCode;
 }
 var _default = {
   data: function data() {

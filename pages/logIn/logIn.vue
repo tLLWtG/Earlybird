@@ -82,6 +82,7 @@
 					});
 					return;
 				}
+				uni.setStorageSync("classsize", data.length - 1);
 				for (let i = 0; i < data.length; i += 1) {
 					let person = data[i];
 					// console.log(person);
