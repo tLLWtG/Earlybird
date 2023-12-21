@@ -51,10 +51,12 @@
 				islogin: false
 			}
 		},
-		onLoad() {
+		onShow() {
 			let loginState = uni.getStorageSync("loginState");
 			if (loginState != "")
 				this.islogin = true;
+			else
+				this.islogin = false;
 		},
 		methods: {
 			onKeyInput1: function(event) {
@@ -103,6 +105,10 @@
 						this.showclass = person.class;
 						this.showid = person.id;
 						this.showname = person.name;
+						uni.setStorageSync("showclass", this.showclass);
+						uni.setStorageSync("showid", this.showid);
+						uni.setStorageSync("showname", this.showname);
+						uni.setStorageSync("showadmin", this.showadmin);
 						return;
 					}
 				}

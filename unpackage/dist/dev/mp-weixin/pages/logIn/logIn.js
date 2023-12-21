@@ -197,9 +197,9 @@ var _default = {
       islogin: false
     };
   },
-  onLoad: function onLoad() {
+  onShow: function onShow() {
     var loginState = uni.getStorageSync("loginState");
-    if (loginState != "") this.islogin = true;
+    if (loginState != "") this.islogin = true;else this.islogin = false;
   },
   methods: {
     onKeyInput1: function onKeyInput1(event) {
@@ -241,14 +241,14 @@ var _default = {
                 i = 0;
               case 10:
                 if (!(i < data.length)) {
-                  _context.next = 22;
+                  _context.next = 26;
                   break;
                 }
                 person = data[i]; // console.log(person);
                 // console.log(person.id);
                 // console.log(person.password);
                 if (!(person.id == _this.id && person.password == _this.password)) {
-                  _context.next = 19;
+                  _context.next = 23;
                   break;
                 }
                 if (person.admin) {
@@ -268,19 +268,23 @@ var _default = {
                 _this.showclass = person.class;
                 _this.showid = person.id;
                 _this.showname = person.name;
+                uni.setStorageSync("showclass", _this.showclass);
+                uni.setStorageSync("showid", _this.showid);
+                uni.setStorageSync("showname", _this.showname);
+                uni.setStorageSync("showadmin", _this.showadmin);
                 return _context.abrupt("return");
-              case 19:
+              case 23:
                 i += 1;
                 _context.next = 10;
                 break;
-              case 22:
+              case 26:
                 uni.showToast({
                   icon: 'error',
                   title: '学号或密码错误'
                 });
                 _this.islogin = false;
                 uni.setStorageSync("loginState", "");
-              case 25:
+              case 29:
               case "end":
                 return _context.stop();
             }

@@ -159,6 +159,12 @@ exports.default = void 0;
 //
 //
 //
+//
+//
+//
+//
+//
+//
 var _default = {
   data: function data() {
     return {
@@ -170,10 +176,24 @@ var _default = {
         color: "#FFC0CB",
         text: "查看个人数据",
         url: '/pages/selfData/selfData'
-      }]
+      }],
+      islogin: false,
+      showadmin: "",
+      showid: "",
+      showname: "",
+      showclass: ""
     };
   },
-  onLoad: function onLoad() {},
+  onShow: function onShow() {
+    var loginState = uni.getStorageSync("loginState");
+    if (loginState != "") {
+      this.islogin = true;
+      this.showid = uni.getStorageSync("showid");
+      this.showname = uni.getStorageSync("showname");
+      this.showclass = uni.getStorageSync("showclass");
+      this.showadmin = uni.getStorageSync("showadmin");
+    } else this.islogin = false;
+  },
   methods: {
     formatTime: function formatTime(date) {
       var year = date.getFullYear();

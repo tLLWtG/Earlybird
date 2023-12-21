@@ -2,7 +2,10 @@
 	<view>
 		<view class="title">每日打卡</view>
 		<view class="subtitle">开卷开卷开卷开卷开卷开卷开卷开卷开卷开卷</view>
-		<view class="navigators">
+		<view v-if="!islogin">
+			<view style="text-align: center;">请登录后再打卡</view>
+		</view>
+		<view v-if="islogin&&showadmin=='stu'" class="navigators">
 			<navigator class="navigatorType" style="background-color: #ADD8E6;" url="/pages/daka/daka" @tap="daka">打卡
 			</navigator>
 			<navigator class="navigatorType" style="background-color: #98FB98;" url="/pages/qiuqian/qiuqian">求签
@@ -11,6 +14,9 @@
 				:style="{backgroundColor:item.color}" :url='item.url'>
 				{{item.text}}
 			</navigator>
+		</view>
+		<view v-if="islogin&&showadmin=='admin'">
+			<view style="text-align: center;">管理员页面</view>
 		</view>
 	</view>
 </template>
@@ -29,11 +35,24 @@
 						text: "查看个人数据",
 						url: '/pages/selfData/selfData'
 					}
-				]
+				],
+				islogin: false,
+				showadmin: "",
+				showid: "",
+				showname: "",
+				showclass: ""
 			}
 		},
-		onLoad() {
-
+		onShow() {
+			let loginState = uni.getStorageSync("loginState");
+			if (loginState != "") {
+				this.islogin = true;
+				this.showid = uni.getStorageSync("showid");
+				this.showname = uni.getStorageSync("showname");
+				this.showclass = uni.getStorageSync("showclass");
+				this.showadmin = uni.getStorageSync("showadmin");
+			} else
+				this.islogin = false;
 		},
 		methods: {
 			formatTime(date) {
