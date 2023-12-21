@@ -29,6 +29,7 @@
 				rank: '加载中',
 				percent: '加载中',
 				showid: "",
+				showname: ""
 			}
 		},
 		methods: {
@@ -83,6 +84,7 @@
 				const db = uniCloud.database();
 				let res = await db.collection('checkrecord').add({
 					"id": this.showid,
+					"name": this.showname,
 					"date": formatdate,
 					"time": formattime
 				});
@@ -128,11 +130,12 @@
 			}
 		},
 		onShow() {
+			this.showid = uni.getStorageSync("showid");
+			this.showname = uni.getStorageSync("showname");
 			this.daka();
 			this.dakaRecords = uni.getStorageSync('dakaInfo');
 			this.hour = this.dakaRecords[0].substr(11, 5);
 			console.log(this.dakaRecords[0].substr(0, 10));
-			this.showid = uni.getStorageSync("showid");
 		},
 	}
 </script>

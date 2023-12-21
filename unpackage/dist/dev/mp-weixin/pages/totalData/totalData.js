@@ -136,12 +136,15 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+/* WEBPACK VAR INJECTION */(function(uni, uniCloud) {
 
-
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
+var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 28));
+var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 31));
 //
 //
 //
@@ -156,51 +159,92 @@ exports.default = void 0;
 var _default = {
   data: function data() {
     return {
-      usersInfo: [{
-        uesrName: '张三',
-        dakaTime: '08:11'
-      }, {
-        uesrName: '张三',
-        dakaTime: '08:15'
-      }, {
-        uesrName: '张三',
-        dakaTime: '08:10'
-      }, {
-        uesrName: '张三',
-        dakaTime: '08:08'
-      }, {
-        uesrName: '张三',
-        dakaTime: '08:11'
-      }, {
-        uesrName: '张三',
-        dakaTime: '08:15'
-      }, {
-        uesrName: '张三',
-        dakaTime: '08:10'
-      }, {
-        uesrName: '张三',
-        dakaTime: '08:08'
-      }] //用来存储各个用户的打卡信息
+      showid: "",
+      usersInfo: [] //用来存储各个用户的打卡信息
     };
   },
 
-  methods: {},
-  onLoad: function onLoad() {
+  methods: {
+    formatTime: function formatTime(date) {
+      var year = date.getFullYear();
+      var month = String(date.getMonth() + 1).padStart(2, '0');
+      var day = String(date.getDate()).padStart(2, '0');
+      var hours = String(date.getHours()).padStart(2, '0');
+      var minutes = String(date.getMinutes()).padStart(2, '0');
+      return "".concat(year, "-").concat(month, "-").concat(day, " ").concat(hours, ":").concat(minutes);
+    },
+    getAllRecord: function getAllRecord() {
+      var _this = this;
+      return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee() {
+        var db, res, isSuccess, data, now, formatdate, i, record;
+        return _regenerator.default.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _this.showid = uni.getStorageSync("showid");
+                db = uniCloud.database();
+                _context.next = 4;
+                return db.collection('checkrecord').get();
+              case 4:
+                res = _context.sent;
+                isSuccess = res.success;
+                data = res.result.data;
+                if (isSuccess) {
+                  _context.next = 10;
+                  break;
+                }
+                uni.showToast({
+                  icon: 'error',
+                  title: '网络错误！'
+                });
+                return _context.abrupt("return");
+              case 10:
+                console.log(data);
+                now = new Date();
+                formatdate = _this.formatTime(now).substr(0, 10);
+                console.log(data);
+                for (i = 0; i < data.length; i += 1) {
+                  record = data[i];
+                  if (record.date == formatdate) {
+                    _this.usersInfo.push({
+                      "userName": record.name,
+                      "dakaTime": record.time
+                    });
+                    if (record.id == _this.showid) {
+                      _this.usersInfo.unshift({
+                        "userName": record.name,
+                        "dakaTime": record.time
+                      });
+                    }
+                  }
+                }
+              case 15:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    }
+  },
+  onShow: function onShow() {
+    this.getAllRecord();
     // 加载页面之前，对所有用户信息的打卡时间进行排序，把排名最高的放在前面
-    this.usersInfo.sort(function (a, b) {
-      var hour_a = a.dakaTime.substr(0, 1) * 10 + a.dakaTime.substr(1, 1);
-      var minute_a = a.dakaTime.substr(3, 1) * 10 + a.dakaTime.substr(4, 1);
-      var hour_b = b.dakaTime.substr(0, 1) * 10 + b.dakaTime.substr(1, 1);
-      var minute_b = b.dakaTime.substr(3, 1) * 10 + b.dakaTime.substr(4, 1);
-      hour_a = parseInt(hour_a);
-      minute_a = parseInt(minute_a);
-      hour_b = parseInt(hour_b);
-      minute_b = parseInt(minute_b);
-      return hour_a * 60 + minute_a - hour_b * 60 - minute_b;
-    });
+    // this.usersInfo.sort(function(a, b) {
+    // 	var hour_a = a.dakaTime.substr(0, 1) * 10 + a.dakaTime.substr(1, 1);
+    // 	var minute_a = a.dakaTime.substr(3, 1) * 10 + a.dakaTime.substr(4, 1);
+    // 	var hour_b = b.dakaTime.substr(0, 1) * 10 + b.dakaTime.substr(1, 1);
+    // 	var minute_b = b.dakaTime.substr(3, 1) * 10 + b.dakaTime.substr(4, 1);
+    // 	hour_a = parseInt(hour_a);
+    // 	minute_a = parseInt(minute_a);
+    // 	hour_b = parseInt(hour_b);
+    // 	minute_b = parseInt(minute_b);
+    // 	return hour_a * 60 + minute_a - hour_b * 60 - minute_b;
+    // })
   }
 };
 exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"], __webpack_require__(/*! ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/uni-cloud/dist/index.js */ 27)["default"]))
 
 /***/ }),
 

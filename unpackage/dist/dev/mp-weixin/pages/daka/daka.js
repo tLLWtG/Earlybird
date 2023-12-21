@@ -174,7 +174,8 @@ var _default = {
       minute: '',
       rank: '加载中',
       percent: '加载中',
-      showid: ""
+      showid: "",
+      showname: ""
     };
   },
   methods: {
@@ -256,6 +257,7 @@ var _default = {
                 _context2.next = 6;
                 return db.collection('checkrecord').add({
                   "id": _this2.showid,
+                  "name": _this2.showname,
                   "date": formatdate,
                   "time": formattime
                 });
@@ -312,11 +314,12 @@ var _default = {
     }
   },
   onShow: function onShow() {
+    this.showid = uni.getStorageSync("showid");
+    this.showname = uni.getStorageSync("showname");
     this.daka();
     this.dakaRecords = uni.getStorageSync('dakaInfo');
     this.hour = this.dakaRecords[0].substr(11, 5);
     console.log(this.dakaRecords[0].substr(0, 10));
-    this.showid = uni.getStorageSync("showid");
   }
 };
 exports.default = _default;
