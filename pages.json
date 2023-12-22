@@ -12,30 +12,46 @@
 			}
 		},
 		{
-			"path": "pages/daka/daka",
+			"path": "pages/student/daka/daka",
 			"style": {
 				"navigationBarTitleText": "打卡"
 			}
 		},
 		{
-			"path": "pages/qiuqian/qiuqian",
+			"path": "pages/student/qiuqian/qiuqian",
 			"style": {
 				"navigationBarTitleText": "求签"
 			}
 
 		},
 		{
-			"path": "pages/selfData/selfData",
+			"path": "pages/student/selfData/selfData",
 			"style": {
 				"navigationBarTitleText": "个人数据"
 			}
 		},
 		{
-			"path": "pages/totalData/totalData",
+			"path": "pages/student/totalData/totalData",
 			"style": {
 				"navigationBarTitleText": "排名",
 				"enablePullDownRefresh": true
 
+			}
+		},
+		{
+			"path": "pages/administor/dayData",
+			"style": {
+				"navigationBarTitleText": "今日数据",
+				"enablePullDownRefresh": true
+		
+			}
+		},
+		{
+			"path": "pages/administor/monthData",
+			"style": {
+				"navigationBarTitleText": "月度数据",
+				"enablePullDownRefresh": true
+		
 			}
 		}
 	],
@@ -56,14 +72,14 @@
 		"list": [{
 				"pagePath": "pages/index/index",
 				"text": "打卡首页",
-				"iconPath": "static/logo.png",
-				"selectedIconPath": "static/logo.png"
+				"iconPath": "static/首页.png",
+				"selectedIconPath": "static/首页.png"
 			},
 			{
-				"pagePath": "pages/logIn/logIn",
+				"pagePath": "pages/logIn/logIn" ,
 				"text": "登录",
-				"selectedIconPath": "static/logo.png",
-				"iconPath": "static/logo.png"
+				"selectedIconPath": "static/保险.png",
+				"iconPath": "static/保险.png"
 			}
 		]
 	},
@@ -72,22 +88,22 @@
 		"current": 0, //当前激活的模式(list 的索引项)
 		"list": [{
 				"name": "dakaTest", //模式名称
-				"path": "pages/daka/daka", //启动页面，必选
+				"path": "pages/student/daka/daka", //启动页面，必选
 				"query": "" //启动参数，在页面的onLoad函数里面得到
 			},
 			{
 				"name": "qiuqianTest", //模式名称
-				"path": "pages/qiuqian/qiuqian", //启动页面，必选
+				"path": "pages/student/qiuqian/qiuqian", //启动页面，必选
 				"query": "" //启动参数，在页面的onLoad函数里面得到
 			},
 			{
 				"name": "selfDataTest", //模式名称
-				"path": "pages/selfData/selfData", //启动页面，必选
+				"path": "pages/student/selfData/selfData", //启动页面，必选
 				"query": "" //启动参数，在页面的onLoad函数里面得到
 			},
 			{
 				"name": "totalDataTest", //模式名称
-				"path": "pages/totalData/totalData", //启动页面，必选
+				"path": "pages/student/totalData/totalData", //启动页面，必选
 				"query": "" //启动参数，在页面的onLoad函数里面得到
 			}
 		]

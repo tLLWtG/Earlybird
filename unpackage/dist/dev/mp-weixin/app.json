@@ -2,10 +2,12 @@
   "pages": [
     "pages/index/index",
     "pages/logIn/logIn",
-    "pages/daka/daka",
-    "pages/qiuqian/qiuqian",
-    "pages/selfData/selfData",
-    "pages/totalData/totalData"
+    "pages/student/daka/daka",
+    "pages/student/qiuqian/qiuqian",
+    "pages/student/selfData/selfData",
+    "pages/student/totalData/totalData",
+    "pages/administor/dayData",
+    "pages/administor/monthData"
   ],
   "subPackages": [],
   "window": {
@@ -19,14 +21,14 @@
       {
         "pagePath": "pages/index/index",
         "text": "打卡首页",
-        "iconPath": "static/logo.png",
-        "selectedIconPath": "static/logo.png"
+        "iconPath": "static/首页.png",
+        "selectedIconPath": "static/首页.png"
       },
       {
         "pagePath": "pages/logIn/logIn",
         "text": "登录",
-        "selectedIconPath": "static/logo.png",
-        "iconPath": "static/logo.png"
+        "selectedIconPath": "static/保险.png",
+        "iconPath": "static/保险.png"
       }
     ]
   },

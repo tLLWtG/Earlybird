@@ -18,10 +18,16 @@
 	@import '@/uni_modules/uni-scss/index.scss';
 	/* #ifndef APP-NVUE */
 	@import '@/static/customicons.css';
+	 /* 引入楷体字体，以及备选字体 */
+	
+	  /* 设置全局字体 */
+	body {
+		font-family: 'KaiTi', 'SimSun', 'STKaiti', sans-serif;
+	}
 
 	// 设置整个项目的背景色
 	page {
-		background-color: #f5f5f5;
+		background-color: #FFF8DC;
 	}
 
 	/* #endif */

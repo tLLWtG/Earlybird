@@ -1,10 +1,14 @@
 <template>
 	<view>
-		<view class="headContainer">今日打卡记录</view>
+		<view class="headContainer">
+			<view class="dataBlocks" v-for="(item,index) in totalData">
+				<view>{{item.text}}</view>
+				<view>{{item.val}}</view>
+			</view>
+		</view>
 		<view class="dataContainer" v-for="(item,index) in usersInfo">
 			<view>{{index}}</view>
 			<view>{{item.uesrName}}</view>
-			<view>{{item.dakaTime}}</view>
 		</view>
 	</view>
 </template>
@@ -13,6 +17,16 @@
 	export default {
 		data() {
 			return {
+				totalData: [
+					{
+						text:'缺勤人数',
+						val:'10'
+					},
+					{
+						text:'缺勤率',
+						val:'20%'
+					}
+				],
 				usersInfo: [{
 						uesrName: '张三',
 						dakaTime: '08:11',
@@ -70,6 +84,9 @@
 
 <style>
 	.headContainer {
+		display: flex;
+		justify-content: space-between;
+		
 		width: 742rpx;
 		height: 350rpx;
 
@@ -95,5 +112,13 @@
 
 		display: flex;
 		justify-content: space-between;
+	}
+	
+	.headContainer .dataBlocks {
+		width: 340rpx;
+		height: 200rpx;
+	
+		line-height: 100rpx;
+		text-align: center;
 	}
 </style>

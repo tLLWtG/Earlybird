@@ -81,7 +81,11 @@
 		width: 340rpx;
 		height: 200rpx;
 
+		margin: 30rpx auto;
+		border-radius: 10rpx;
+	
 		line-height: 100rpx;
 		text-align: center;
+		font-size: 40rpx;
 	}
 </style>
