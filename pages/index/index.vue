@@ -8,25 +8,15 @@
 				----{{hitokotoFrom}}
 			</view>
 		</view>
-		
+
 		<view v-if="!islogin">
 			<view style="text-align: center; font-size: 50rpx; margin-top: 300rpx;">请登录后再打卡</view>
 		</view>
-		
-		<view v-if="islogin&&showadmin=='stu'" class="navigators">
-<<<<<<< HEAD
-			<navigator class="navigatorType" style="background-color: #ADD8E6;" url="/pages/daka/daka">打卡
-			</navigator>
-			<navigator class="navigatorType" style="background-color: #98FB98;" url="/pages/qiuqian/qiuqian">求签
-			</navigator>
-			<navigator class="navigatorType" v-for="(item,index) in navigatorItems"
-				:style="{backgroundColor:item.color}" :url='item.url'>
-				{{item.text}}
-			</navigator>
-=======
-			<view class = "navigatorBlock">
+
+		<view v-if="islogin&&showadmin=='stu'" class="navigators" style="margin-top: 100rpx;">
+			<view class="navigatorBlock">
 				<view style="background-image: url(../../static/clipboard-check.svg);" class="imageType">
-					<navigator url="/pages/student/daka/daka" @tap="daka" class="navigatorType"></navigator>
+					<navigator url="/pages/student/daka/daka" class="navigatorType"></navigator>
 				</view>
 				<view style="line-height: 30rpx; text-align: center; font-style: Chewy; font-size: 40rpx;">打卡</view>
 			</view>
@@ -36,17 +26,14 @@
 				</view>
 				<view style="line-height: 30rpx; text-align: center; font-size: 40rpx;">{{item.text}}</view>
 			</view>
->>>>>>> frontEnd_1
 		</view>
-		
-		<view v-if="islogin&&showadmin=='admin'">
-			<view class = "navigators">
-				<view class="navigatorBlock" v-for="(item,index) in administorNavigatorItems">
-					<view class="imageType" :style="{ 'background-image': 'url(' + item.src + ')' }">
-						<navigator :url='item.url' class="navigatorType"></navigator>
-					</view>
-					<view style="line-height: 30rpx; text-align: center; font-size: 40rpx;">{{item.text}}</view>
+
+		<view v-if="islogin&&showadmin=='admin'" class="navigators" style="margin-top: 100rpx;">
+			<view class="navigatorBlock" v-for="(item,index) in administorNavigatorItems">
+				<view class="imageType" :style="{ 'background-image': 'url(' + item.src + ')' }">
+					<navigator :url='item.url' class="navigatorType"></navigator>
 				</view>
+				<view style="line-height: 30rpx; text-align: center; font-size: 40rpx;">{{item.text}}</view>
 			</view>
 		</view>
 	</view>
@@ -57,7 +44,7 @@
 		data() {
 			return {
 				StudentNavigatorItems: [{
-						src:'../../static/dice-5.svg',
+						src: '../../static/dice-5.svg',
 						text: "求签",
 						url: '/pages/student/qiuqian/qiuqian'
 					},
@@ -72,16 +59,15 @@
 						url: '/pages/student/selfData/selfData'
 					},
 				],
-				administorNavigatorItems:[
-					{
-						src:"../../static/bar-chart.svg",
-						text:'今日打卡数据',
-						url:'/pages/administor/dayData'
+				administorNavigatorItems: [{
+						src: "../../static/bar-chart.svg",
+						text: '今日打卡数据',
+						url: '/pages/administor/dayData'
 					},
 					{
-						src:"../../static/graph-up.svg",
-						text:'月度打卡数据',
-						url:'/pages/administor/monthData'
+						src: "../../static/graph-up.svg",
+						text: '月度打卡数据',
+						url: '/pages/administor/monthData'
 					}
 				],
 				islogin: false,
@@ -128,7 +114,6 @@
 		width: 650rpx;
 		height: 200rpx;
 
-<<<<<<< HEAD
 		margin: 0 auto;
 
 		line-height: 200rpx;
@@ -140,14 +125,13 @@
 		width: 650rpx;
 		height: 150rpx;
 
-=======
->>>>>>> frontEnd_1
+
 		margin: 50rpx auto;
 
 		line-height: 80rpx;
 		font-size: 40rpx;
 		text-align: center;
-		
+
 		radius: 10rpx;
 	}
 
@@ -160,27 +144,27 @@
 		flex-wrap: wrap;
 	}
 
-	.navigators .navigatorBlock{
+	.navigators .navigatorBlock {
 		display: flex;
 		flex-direction: column;
-		margin:0 30rpx
+		margin: 0 30rpx
 	}
 
-	.navigators .navigatorBlock .imageType{
+	.navigators .navigatorBlock .imageType {
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		
+
 		width: 200rpx;
 		height: 200rpx;
-	
+
 		margin: 30rpx auto;
-		
+
 		line-height: 150rpx;
 		text-align: center;
-		
+
 		background-position: center;
-		background-size: cover;	
+		background-size: cover;
 	}
 
 	.navigators .navigatorBlock .imageType .navigatorType {
@@ -188,12 +172,11 @@
 		height: 190rpx;
 
 		margin: 30rpx auto;
-		
+
 		line-height: 150rpx;
 		text-align: center;
-		
+
 		background-position: center;
 		background-size: cover;
 	}
-	
 </style>

@@ -102,6 +102,7 @@
 				this.selfData[1].val = filteredData.length;
 				this.selfData[2].val = (this.selfData[0].val / 7 * 100).toFixed(0) + "%";
 				this.selfData[3].val = formattedAverageTime;
+				this.recordarr = this.recordarr.reverse();
 			}
 		},
 		onShow() {

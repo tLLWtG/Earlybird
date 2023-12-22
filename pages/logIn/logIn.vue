@@ -29,18 +29,14 @@
 			</view>
 			<button class="logInButton" @click="checkLogout">登出</button>
 		</view>
-<<<<<<< HEAD
 		<view class="inputContianer">
-			<view style="margin-bottom: 30rpx;">请输入账号</view>
-			<input class="inputs" @input="onKeyInput1" placeholder="学号/工号" />
-=======
-		<view v-if = "!islogin" class ="inputContianer">
-			<view style="margin-bottom: 30rpx;">请输入学号</view>
-			<input class="inputs" @input="onKeyInput1" />
->>>>>>> frontEnd_1
-			<view style="margin-bottom: 30rpx;">请输入密码</view>
-			<input class="inputs" @input="onKeyInput2" type="password" />
-			<button class="logInButton" @click="checkLogin" v-if = "!islogin">登录</button>
+			<view v-if="!islogin" class="inputContianer">
+				<view style="margin-bottom: 30rpx;">请输入学号/工号</view>
+				<input class="inputs" @input="onKeyInput1" />
+				<view style="margin-bottom: 30rpx;">请输入密码</view>
+				<input class="inputs" @input="onKeyInput2" type="password" />
+				<button class="logInButton" @click="checkLogin" v-if="!islogin">登录</button>
+			</view>
 		</view>
 	</view>
 </template>
@@ -60,28 +56,18 @@
 		},
 		onShow() {
 			let loginState = uni.getStorageSync("loginState");
-			if (loginState != "")
-			{
+			if (loginState != "") {
 				this.islogin = true;
-<<<<<<< HEAD
 				this.showid = uni.getStorageSync("showid");
 				this.showname = uni.getStorageSync("showname");
 				this.showadmin = uni.getStorageSync("showadmin");
 				this.showclass = uni.getStorageSync("showclass");
-			}
-=======
-				this.showadmin = uni.getStorageSync('showadmin');
-				this.showname = uni.getStorageSync('showname');
-				this.showid = uni.getStorageSync('showid');
-				this.showclass = uni.getStorageSync('showclass');
-			}	
->>>>>>> frontEnd_1
-			else
+			} else
 				this.islogin = false;
 			console.log(this.showadmin);
 		},
 		onLoad() {
-			
+
 		},
 		methods: {
 			onKeyInput1: function(event) {
@@ -90,17 +76,21 @@
 			onKeyInput2: function(event) {
 				this.password = event.target.value;
 			},
-			checkLogout()
-			{
+			checkLogout() {
 				this.islogin = false;
 				this.showadmin = '';
-				this.showname ='';
+				this.showname = '';
 				this.showid = '';
-				this.showclass = ''
+				this.showclass = '';
+				uni.setStorageSync("showclass", "");
+				uni.setStorageSync("showid", "");
+				uni.setStorageSync("showname", "");
+				uni.setStorageSync("showadmin", "");
+				uni.setStorageSync("loginState", "");
 			},
 			async checkLogin() {
 				uni.showLoading({
-					title:'登录中'
+					title: '登录中'
 				});
 				const db = uniCloud.database();
 				let res = await db.collection('login').get();
@@ -127,7 +117,7 @@
 					if (person.id == this.id && person.password == this.password) {
 						if (person.admin) {
 							uni.showToast({
-								title: '登录成功' 
+								title: '登录成功'
 							});
 							uni.setStorageSync("loginState", "admin");
 							this.showadmin = "admin";
@@ -168,7 +158,7 @@
 		flex-direction: column;
 		justify-content: center;
 		align-content: center;
-		
+
 		font-size: 50rpx;
 		line-height: 80rpx;
 	}
@@ -202,8 +192,8 @@
 		width: 650rpx;
 		height: 50rpx;
 		margin-bottom: 20rpx;
-		
-		border:2rpx solid #D3D3D3;
+
+		border: 2rpx solid #D3D3D3;
 		border-radius: 10rpx;
 	}
 
@@ -211,11 +201,10 @@
 		width: 650rpx;
 		height: 100rpx;
 		margin: 0 auto;
-		
+
 		background-color: #F5F5DC;
 		font-size: 50rpx;
 		text-align: center;
 		line-height: 100rpx;
-	} 
-	
+	}
 </style>

@@ -1,1 +1,0 @@
-<view><view class="headContainer">今日打卡记录</view><block wx:for="{{usersInfo}}" wx:for-item="item" wx:for-index="index"><view class="dataContainer"><view>{{index}}</view><view>{{item.uesrName}}</view><view>{{item.dakaTime}}</view></view></block></view>

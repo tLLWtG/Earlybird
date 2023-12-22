@@ -1,1 +1,0 @@
-<view><view class="dataContainer"><block wx:for="{{selfData}}" wx:for-item="item" wx:for-index="index"><view class="dataBlocks"><view>{{item.text}}</view><view>{{item.val}}</view></view></block></view></view>

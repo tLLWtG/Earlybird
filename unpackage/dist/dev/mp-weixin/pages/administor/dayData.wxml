@@ -1,1 +1,0 @@
-<view><view class="headContainer"><block wx:for="{{totalData}}" wx:for-item="item" wx:for-index="index"><view class="dataBlocks"><view>{{item.text}}</view><view>{{item.val}}</view></view></block></view><block wx:for="{{usersInfo}}" wx:for-item="item" wx:for-index="index"><view class="dataContainer"><view>{{index}}</view><view>{{item.uesrName}}</view></view></block></view>

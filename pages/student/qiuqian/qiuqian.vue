@@ -5,9 +5,9 @@
 		<view class="luckContainer" :hidden="luckActive">
 			<view class="lineContainer" style="line-height: 10vh;">【今日人品】{{jrrp}}</view>
 			<view class="lineContainer" style="line-height: 10vh;">【宜】{{yi}}</view>
-			<view class="lineContainer" style="line-height: 10vh;">【宜】{{yi}}</view>
+			<view class="lineContainer" style="line-height: 10vh;">【宜】{{yi2}}</view>
 			<view class="lineContainer" style="line-height: 10vh;">【忌】{{ji}}</view>
-			<view class="lineContainer" style="line-height: 10vh;">【忌】{{ji}}</view>
+			<view class="lineContainer" style="line-height: 10vh;">【忌】{{ji2}}</view>
 			<button style="width: 400rpx height:30rpx;" @click="clickButtonReturn">返回</button>
 		</view>
 		<button class="buttons" @click="clickButtonQiuqian">上香</button>
@@ -71,6 +71,19 @@
 			ji() {
 				let hash = getDate();
 				hash += this.showid * 3;
+				hash = hashFunc(hash, this.bad.length);
+				return this.bad[hash];
+			}
+			,
+			yi2() {
+				let hash = getDate();
+				hash += this.showid * 4;
+				hash = hashFunc(hash, this.good.length);
+				return this.good[hash];
+			},
+			ji2() {
+				let hash = getDate();
+				hash += this.showid * 5;
 				hash = hashFunc(hash, this.bad.length);
 				return this.bad[hash];
 			}
