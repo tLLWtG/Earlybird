@@ -136,7 +136,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni, uniCloud) {
+/* WEBPACK VAR INJECTION */(function(uniCloud, uni) {
 
 var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
 Object.defineProperty(exports, "__esModule", {
@@ -156,55 +156,50 @@ var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/r
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var _default = {
   data: function data() {
     return {
       selfData: [{
         text: '缺勤次数',
-        val: 0
+        val: '加载中...'
       }, {
-        text: '功德量',
-        val: 0
+        text: '打卡次数',
+        val: '加载中...'
       }, {
         text: '缺勤率',
-        val: 0
+        val: '加载中...'
       }, {
         text: '平均早起时间',
-        val: 0
+        val: '加载中...'
       }],
-      record: []
+      recordarr: [],
+      showid: ""
     };
   },
   methods: {
-    ababa: function ababa() {
-      //导入求签打卡记录
-      var qiuQianRecord = uni.getStorageSync('qiuQianInfo') || [];
-      var dakaRecord = uni.getStorageSync('dakaInfo') || [];
-      //计算今天是今年的第几天，以及累计打卡天数
-      var now = new Date();
-      var firstDay = new Date(now.getFullYear(), 0, 1);
-      var passedDays = Math.ceil((now - firstDay) / (1000 * 60 * 60 * 24));
-      var dakaDays = dakaRecord.length;
-      //修改缺勤次数，功德量和缺勤率
-      this.selfData[0].val = passedDays - dakaDays;
-      this.selfData[1].val = qiuQianRecord.length;
-      this.selfData[2].val = ((passedDays - dakaDays) * 100 / passedDays).toFixed(1).toString() + '%';
-      //计算平均早起时间
-      var averageTime = 0;
-      console.log(dakaRecord[0].substr(11, 1));
-      for (var i = 0; i < dakaRecord.length; i++) {
-        var hour = parseInt(dakaRecord[i].substr(11, 1)) * 10 + parseInt(dakaRecord[i].substr(12, 1));
-        var minute = parseInt(dakaRecord[i].substr(14, 1)) * 10 + parseInt(dakaRecord[i].substr(15, 1));
-        averageTime += hour * 60 + minute;
-      }
-      var averageHour = Math.floor(averageTime / 60);
-      var averageMinute = averageTime - averageHour * 60;
-      this.selfData[3].val = averageHour.toString() + ':' + averageMinute.toString();
+    formatTime: function formatTime(date) {
+      var year = date.getFullYear();
+      var month = String(date.getMonth() + 1).padStart(2, '0');
+      var day = String(date.getDate()).padStart(2, '0');
+      var hours = String(date.getHours()).padStart(2, '0');
+      var minutes = String(date.getMinutes()).padStart(2, '0');
+      return "".concat(year, "-").concat(month, "-").concat(day, " ").concat(hours, ":").concat(minutes);
     },
     updateRecord: function updateRecord() {
       var _this = this;
       return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee() {
-        var db, res, isSuccess, data, classSize, Count, now, formatdate, formattime, i, record;
+        var db, res, isSuccess, data, i, record, currentDate, totalTime, sevenDaysAgo, filteredData, _i, time, totalMinutes, averageTimeInMinutes, hours, minutes, formattedAverageTime;
         return _regenerator.default.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -227,18 +222,37 @@ var _default = {
                 return _context.abrupt("return");
               case 9:
                 console.log(data);
-                classSize = uni.getStorageSync('classsize');
-                Count = 0;
-                now = new Date();
-                formatdate = _this.formatTime(now).substr(0, 10);
-                formattime = _this.formatTime(now).substr(11, 5);
                 for (i = 0; i < data.length; i += 1) {
                   record = data[i];
-                  if (record.date == formatdate && formattime >= record.time) ++doneCount;
+                  if (record.id == _this.showid) _this.recordarr.push(record);
                 }
-                _this.rank = doneCount;
-                _this.percent = doneCount / classSize * 100;
-              case 18:
+                // let now = new Date();
+                // let formatdate = this.formatTime(now).substr(0, 10);
+                currentDate = new Date();
+                totalTime = 0; // 统计过去七天的日期范围
+                sevenDaysAgo = new Date(currentDate);
+                sevenDaysAgo.setDate(currentDate.getDate() - 6); // 减去六天，因为包括当前日期总共七天
+
+                // 过滤出在过去七天范围内的数据
+                filteredData = _this.recordarr.filter(function (entry) {
+                  var entryDate = new Date(entry.date);
+                  return entryDate >= sevenDaysAgo && entryDate <= currentDate;
+                });
+                for (_i = 0; _i < filteredData.length; ++_i) {
+                  time = filteredData[_i].time.split(":").map(Number); // 将时间字符串转换为 [hours, minutes]
+                  totalMinutes = time[0] * 60 + time[1];
+                  totalTime += totalMinutes;
+                }
+                averageTimeInMinutes = totalTime / filteredData.length;
+                hours = Math.floor(averageTimeInMinutes / 60);
+                minutes = Math.round(averageTimeInMinutes % 60);
+                formattedAverageTime = "".concat(hours.toString().padStart(2, '0'), ":").concat(minutes.toString().padStart(2, '0'));
+                console.log(filteredData);
+                _this.selfData[0].val = 7 - filteredData.length;
+                _this.selfData[1].val = filteredData.length;
+                _this.selfData[2].val = (_this.selfData[0].val / 7 * 100).toFixed(0) + "%";
+                _this.selfData[3].val = formattedAverageTime;
+              case 26:
               case "end":
                 return _context.stop();
             }
@@ -248,12 +262,12 @@ var _default = {
     }
   },
   onShow: function onShow() {
+    this.showid = uni.getStorageSync("showid");
     this.updateRecord();
-    this.ababa();
   }
 };
 exports.default = _default;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"], __webpack_require__(/*! ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/uni-cloud/dist/index.js */ 27)["default"]))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/uni-cloud/dist/index.js */ 27)["default"], __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
 

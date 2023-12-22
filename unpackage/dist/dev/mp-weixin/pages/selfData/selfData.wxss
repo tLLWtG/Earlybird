@@ -1,4 +1,14 @@
 
+.subtitle {
+	width: 650rpx;
+	height: 150rpx;
+
+	margin: 50rpx auto;
+
+	line-height: 50rpx;
+	font-size: 30rpx;
+	text-align: center;
+}
 .dataContainer {
 	display: flex;
 	justify-content: space-around;

@@ -53,6 +53,7 @@
 			}
 		},
 		onShow() {
+			// this.delete()
 			wx.request({
 				url: 'https://v1.hitokoto.cn?c=a&c=d&c=i&c=k',
 				method: 'GET',
@@ -73,7 +74,10 @@
 				this.islogin = false;
 		},
 		methods: {
-			
+			// async delete() {
+			// 	const db = uniCloud.database();
+			// 	db.collection('checkrecord').doc('658444ff9755e3cdbf9ebe84').remove();
+			// }
 		}
 	}
 </script>

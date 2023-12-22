@@ -1,10 +1,21 @@
 <template>
 	<view>
+		<view class="subtitle">
+			过去七天历史记录统计
+		</view>
 		<view class="dataContainer">
+
 			<view class="dataBlocks" v-for="(item,index) in selfData">
 				<view>{{item.text}}</view>
 				<view>{{item.val}}</view>
 			</view>
+		</view>
+		<view class="subtitle" style="text-align: left;">
+			完整历史记录
+		</view>
+		<view v-for="(item,index) in recordarr" :key="index">
+			<view>{{item.date}}</view>
+			<view>{{item.time}}</view>
 		</view>
 	</view>
 </template>
@@ -15,56 +26,103 @@
 			return {
 				selfData: [{
 						text: '缺勤次数',
-						val: 0
+						val: '加载中...'
 					},
 					{
-						text: '功德量',
-						val: 0
+						text: '打卡次数',
+						val: '加载中...'
 					},
 					{
 						text: '缺勤率',
-						val: 0
+						val: '加载中...'
 					},
 					{
 						text: '平均早起时间',
-						val: 0
+						val: '加载中...'
 					}
-				]
+				],
+				recordarr: [],
+				showid: ""
 			}
 		},
 		methods: {
+			formatTime(date) {
+				const year = date.getFullYear();
+				const month = String(date.getMonth() + 1).padStart(2, '0');
+				const day = String(date.getDate()).padStart(2, '0');
+				const hours = String(date.getHours()).padStart(2, '0');
+				const minutes = String(date.getMinutes()).padStart(2, '0');
+				return `${year}-${month}-${day} ${hours}:${minutes}`;
+			},
+			async updateRecord() {
+				const db = uniCloud.database();
+				let res = await db.collection('checkrecord').get();
+				let isSuccess = res.success;
+				let data = res.result.data;
+				if (!isSuccess) {
+					uni.showToast({
+						icon: 'error',
+						title: '网络错误！'
+					});
+					return;
+				}
+				console.log(data);
+				for (let i = 0; i < data.length; i += 1) {
+					let record = data[i];
+					if (record.id == this.showid)
+						this.recordarr.push(record);
+				}
+				// let now = new Date();
+				// let formatdate = this.formatTime(now).substr(0, 10);
 
-		},
-		onLoad() {
-			//导入求签打卡记录
-			var qiuQianRecord = uni.getStorageSync('qiuQianInfo') || [];
-			var dakaRecord = uni.getStorageSync('dakaInfo') || [];
-			//计算今天是今年的第几天，以及累计打卡天数
-			var now = new Date();
-			var firstDay = new Date(now.getFullYear(), 0, 1);
-			var passedDays = Math.ceil((now - firstDay) / (1000 * 60 * 60 * 24));
-			var dakaDays = dakaRecord.length;
-			//修改缺勤次数，功德量和缺勤率
-			this.selfData[0].val = passedDays - dakaDays;
-			this.selfData[1].val = qiuQianRecord.length;
-			this.selfData[2].val = (((passedDays - dakaDays) * 100 / passedDays).toFixed(1)).toString() + '%';
-			//计算平均早起时间
-			var averageTime = 0;
-			console.log(dakaRecord[0].substr(11, 1));
-			for (var i = 0; i < dakaRecord.length; i++) {
-				var hour = parseInt(dakaRecord[i].substr(11, 1)) * 10 + parseInt(dakaRecord[i].substr(12, 1));
-				var minute = parseInt(dakaRecord[i].substr(14, 1)) * 10 + parseInt(dakaRecord[i].substr(15, 1));
-				averageTime += hour * 60 + minute;
+				const currentDate = new Date();
+				let totalTime = 0;
+				// 统计过去七天的日期范围
+				const sevenDaysAgo = new Date(currentDate);
+				sevenDaysAgo.setDate(currentDate.getDate() - 6); // 减去六天，因为包括当前日期总共七天
+
+				// 过滤出在过去七天范围内的数据
+				const filteredData = this.recordarr.filter(entry => {
+					const entryDate = new Date(entry.date);
+					return entryDate >= sevenDaysAgo && entryDate <= currentDate;
+				});
+				for (let i = 0; i < filteredData.length; ++i) {
+					const time = filteredData[i].time.split(":").map(Number); // 将时间字符串转换为 [hours, minutes]
+					const totalMinutes = time[0] * 60 + time[1];
+					totalTime += totalMinutes;
+				}
+				const averageTimeInMinutes = totalTime / filteredData.length;
+				const hours = Math.floor(averageTimeInMinutes / 60);
+				const minutes = Math.round(averageTimeInMinutes % 60);
+				const formattedAverageTime =
+					`${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+
+				console.log(filteredData);
+				this.selfData[0].val = 7 - filteredData.length;
+				this.selfData[1].val = filteredData.length;
+				this.selfData[2].val = (this.selfData[0].val / 7 * 100).toFixed(0) + "%";
+				this.selfData[3].val = formattedAverageTime;
 			}
-			var averageHour = Math.floor(averageTime / 60);
-			var averageMinute = averageTime - averageHour * 60;
-			this.selfData[3].val = averageHour.toString() + ':' + averageMinute.toString();
-
+		},
+		onShow() {
+			this.showid = uni.getStorageSync("showid");
+			this.updateRecord();
 		}
 	}
 </script>
 
 <style>
+	.subtitle {
+		width: 650rpx;
+		height: 150rpx;
+
+		margin: 50rpx auto;
+
+		line-height: 50rpx;
+		font-size: 30rpx;
+		text-align: center;
+	}
+
 	.dataContainer {
 		display: flex;
 		justify-content: space-around;

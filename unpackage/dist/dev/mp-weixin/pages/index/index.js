@@ -195,6 +195,7 @@ var _default = {
   },
   onShow: function onShow() {
     var _this = this;
+    // this.delete()
     wx.request({
       url: 'https://v1.hitokoto.cn?c=a&c=d&c=i&c=k',
       method: 'GET',
@@ -213,7 +214,12 @@ var _default = {
       this.showadmin = uni.getStorageSync("showadmin");
     } else this.islogin = false;
   },
-  methods: {}
+  methods: {
+    // async delete() {
+    // 	const db = uniCloud.database();
+    // 	db.collection('checkrecord').doc('658444ff9755e3cdbf9ebe84').remove();
+    // }
+  }
 };
 exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/wx.js */ 1)["default"], __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
