@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 (global["webpackJsonp"] = global["webpackJsonp"] || []).push([["pages/selfData/selfData"],{
 
 /***/ 77:
@@ -302,3 +303,6 @@ __webpack_require__.r(__webpack_exports__);
 
 },[[77,"common/runtime","common/vendor"]]]);
 //# sourceMappingURL=../../../.sourcemap/mp-weixin/pages/selfData/selfData.js.map
+=======
+Component({})
+>>>>>>> frontEnd_1

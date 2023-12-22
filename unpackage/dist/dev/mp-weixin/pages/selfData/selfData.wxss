@@ -1,4 +1,5 @@
 
+<<<<<<< HEAD
 .subtitle {
 	width: 650rpx;
 	height: 150rpx;
@@ -9,6 +10,8 @@
 	font-size: 30rpx;
 	text-align: center;
 }
+=======
+>>>>>>> frontEnd_1
 .dataContainer {
 	display: flex;
 	justify-content: space-around;

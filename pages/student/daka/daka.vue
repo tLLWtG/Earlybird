@@ -2,7 +2,7 @@
 	<view>
 		<view class="sentenceContainer">别卷了，快点回去睡觉（请在8:00前完成打卡）</view>
 		<view class="dakaSuccessContainer">
-			<view>你已经在今日{{hour}}打卡成功</view>
+			<view>你已经在今日{{hour}} 打卡成功</view>
 		</view>
 		<view v-if="rank!='加载中'" class="dakaSuccessContainer">
 			<view>你是今天第{{rank}}个打卡的人</view>

@@ -6,6 +6,8 @@
   flex-direction: column;
   justify-content: center;
   align-content: center;
+  font-size: 50rpx;
+  line-height: 80rpx;
 }
 .imageContainer {
   display: flex;
@@ -30,10 +32,16 @@
   width: 650rpx;
   height: 50rpx;
   margin-bottom: 20rpx;
+  border: 2rpx solid #D3D3D3;
+  border-radius: 10rpx;
 }
 .logInButton {
-  width: 400rpx;
+  width: 650rpx;
   height: 100rpx;
   margin: 0 auto;
+  background-color: #F5F5DC;
+  font-size: 50rpx;
+  text-align: center;
+  line-height: 100rpx;
 }
 

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 (global["webpackJsonp"] = global["webpackJsonp"] || []).push([["pages/qiuqian/qiuqian"],{
 
 /***/ 69:
@@ -294,3 +295,6 @@ __webpack_require__.r(__webpack_exports__);
 
 },[[69,"common/runtime","common/vendor"]]]);
 //# sourceMappingURL=../../../.sourcemap/mp-weixin/pages/qiuqian/qiuqian.js.map
+=======
+Component({})
+>>>>>>> frontEnd_1

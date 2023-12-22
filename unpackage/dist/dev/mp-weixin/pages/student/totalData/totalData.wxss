@@ -1,0 +1,30 @@
+
+.headContainer {
+	width: 742rpx;
+	height: 350rpx;
+
+	border: 2rpx solid black;
+	border-radius: 10rpx;
+
+	line-height: 350rpx;
+	text-align: center;
+	font-size: 50rpx;
+}
+.dataContainer {
+	width: 683rpx;
+	height: 150rpx;
+
+	border: 2rpx solid black;
+	border-radius: 10rpx;
+
+	line-height: 150rpx;
+	text-align: center;
+	font-size: 40rpx;
+
+	padding: 0 30rpx;
+	margin: 15rpx auto;
+
+	display: flex;
+	justify-content: space-between;
+}
+

@@ -1,12 +1,14 @@
 <template>
 	<view>
-		<image class="backgroundImage" src="../../static/shangxiang.gif"></image>
-		<view class="titleContainer">上电子香火，积赛博功德</view>
+		<image class="backgroundImage" src="/static/shangxiang.gif"></image>
+		<view class="titleContainer" style="font-size: 50rpx;">上电子香火，积赛博功德</view>
 		<view class="luckContainer" :hidden="luckActive">
 			<view class="lineContainer" style="line-height: 10vh;">【今日人品】{{jrrp}}</view>
 			<view class="lineContainer" style="line-height: 10vh;">【宜】{{yi}}</view>
+			<view class="lineContainer" style="line-height: 10vh;">【宜】{{yi}}</view>
 			<view class="lineContainer" style="line-height: 10vh;">【忌】{{ji}}</view>
-			<button style="width: 400rpx height:30rpx; background-color: aqua;" @click="clickButtonReturn">返回</button>
+			<view class="lineContainer" style="line-height: 10vh;">【忌】{{ji}}</view>
+			<button style="width: 400rpx height:30rpx;" @click="clickButtonReturn">返回</button>
 		</view>
 		<button class="buttons" @click="clickButtonQiuqian">上香</button>
 
@@ -153,6 +155,11 @@
 
 		width: 400rpx;
 		height: 100rpx;
+		background-color: cornsilk;
+		
+		line-height: 100rpx;
+		font-size: 50rpx;
+		text-align: center;
 	}
 
 	.luckContainer {

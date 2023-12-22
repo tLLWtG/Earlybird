@@ -88,6 +88,7 @@
 
 		line-height: 350rpx;
 		text-align: center;
+		font-size: 50rpx;
 	}
 
 	.dataContainer {
@@ -99,6 +100,7 @@
 
 		line-height: 150rpx;
 		text-align: center;
+		font-size: 40rpx;
 
 		padding: 0 30rpx;
 		margin: 15rpx auto;

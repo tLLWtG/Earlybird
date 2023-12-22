@@ -2353,8 +2353,13 @@
   background-color: #f4f4f5;
   border-color: #e9e9eb;
 }
+/* 引入楷体字体，以及备选字体 */
+/* 设置全局字体 */
 page {
-  background-color: #f5f5f5;
+  font-family: 'KaiTi', 'SimSun', 'STKaiti', sans-serif;
+}
+page {
+  background-color: #FFF8DC;
 }
 .example-info {
   font-size: 14px;

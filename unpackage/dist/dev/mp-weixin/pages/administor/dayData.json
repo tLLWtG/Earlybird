@@ -1,0 +1,5 @@
+{
+  "navigationBarTitleText": "今日数据",
+  "enablePullDownRefresh": true,
+  "usingComponents": {}
+}

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 (global["webpackJsonp"] = global["webpackJsonp"] || []).push([["pages/totalData/totalData"],{
 
 /***/ 85:
@@ -279,3 +280,6 @@ __webpack_require__.r(__webpack_exports__);
 
 },[[85,"common/runtime","common/vendor"]]]);
 //# sourceMappingURL=../../../.sourcemap/mp-weixin/pages/totalData/totalData.js.map
+=======
+Component({})
+>>>>>>> frontEnd_1

@@ -1,0 +1,5 @@
+{
+  "navigationBarTitleText": "月度数据",
+  "enablePullDownRefresh": true,
+  "usingComponents": {}
+}

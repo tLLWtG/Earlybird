@@ -1,0 +1,38 @@
+
+.headContainer {
+	display: flex;
+	justify-content: space-between;
+	
+	width: 742rpx;
+	height: 350rpx;
+
+	border: 2rpx solid black;
+	border-radius: 10rpx;
+
+	line-height: 350rpx;
+	text-align: center;
+}
+.dataContainer {
+	width: 683rpx;
+	height: 150rpx;
+
+	border: 2rpx solid black;
+	border-radius: 10rpx;
+
+	line-height: 150rpx;
+	text-align: center;
+
+	padding: 0 30rpx;
+	margin: 15rpx auto;
+
+	display: flex;
+	justify-content: space-between;
+}
+.headContainer .dataBlocks {
+	width: 340rpx;
+	height: 200rpx;
+
+	line-height: 100rpx;
+	text-align: center;
+}
+

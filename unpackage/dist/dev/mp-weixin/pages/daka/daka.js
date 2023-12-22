@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 (global["webpackJsonp"] = global["webpackJsonp"] || []).push([["pages/daka/daka"],{
 
 /***/ 61:
@@ -358,3 +359,6 @@ __webpack_require__.r(__webpack_exports__);
 
 },[[61,"common/runtime","common/vendor"]]]);
 //# sourceMappingURL=../../../.sourcemap/mp-weixin/pages/daka/daka.js.map
+=======
+Component({})
+>>>>>>> frontEnd_1
