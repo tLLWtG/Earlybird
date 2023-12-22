@@ -67,6 +67,7 @@
 					return;
 				}
 				console.log(data);
+				this.recordarr = [];
 				for (let i = 0; i < data.length; i += 1) {
 					let record = data[i];
 					if (record.id == this.showid)

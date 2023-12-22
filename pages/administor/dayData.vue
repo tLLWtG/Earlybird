@@ -6,9 +6,26 @@
 				<view>{{item.val}}</view>
 			</view>
 		</view>
-		<view class="dataContainer" v-for="(item,index) in usersInfo">
+		<!-- 这里要做一个可选的按钮，切换已打卡和未打卡的显示 -->
+		<!-- 这里要做一个可选的按钮，切换已打卡和未打卡的显示 -->
+		<!-- 这里要做一个可选的按钮，切换已打卡和未打卡的显示 -->
+		<!-- 这里要做一个可选的按钮，切换已打卡和未打卡的显示 -->
+		<!-- 这里要做一个可选的按钮，切换已打卡和未打卡的显示 -->
+		<view class="" style="text-align: left;">
+			已打卡名单
+		</view>
+		<view class="dataContainer" v-for="(item,index) in daka">
 			<view>{{index}}</view>
-			<view>{{item.uesrName}}</view>
+			<view>{{item.name}}</view>
+			<view>{{item.time}}</view>
+		</view>
+		<view class="" style="text-align: left;">
+			未打卡名单
+		</view>
+		<view class="dataContainer" v-for="(item,index) in notdaka">
+			<view>{{index}}</view>
+			<view>{{item.name}}</view>
+			<view>{{item.id}}</view>
 		</view>
 	</view>
 </template>
@@ -17,67 +34,104 @@
 	export default {
 		data() {
 			return {
-				totalData: [
-					{
-						text:'缺勤人数',
-						val:'10'
+				totalData: [{
+						text: '缺勤人数',
+						val: '加载中...'
 					},
 					{
-						text:'缺勤率',
-						val:'20%'
+						text: '缺勤率',
+						val: '加载中...'
 					}
 				],
-				usersInfo: [{
-						uesrName: '张三',
-						dakaTime: '08:11',
-					},
-					{
-						uesrName: '张三',
-						dakaTime: '08:15',
-					},
-					{
-						uesrName: '张三',
-						dakaTime: '08:10',
-					},
-					{
-						uesrName: '张三',
-						dakaTime: '08:08',
-					},
-					{
-						uesrName: '张三',
-						dakaTime: '08:11',
-					},
-					{
-						uesrName: '张三',
-						dakaTime: '08:15',
-					},
-					{
-						uesrName: '张三',
-						dakaTime: '08:10',
-					},
-					{
-						uesrName: '张三',
-						dakaTime: '08:08',
-					}
-				] //用来存储各个用户的打卡信息
+				daka: [],
+				notdaka: [],
 			}
 		},
 		methods: {
+			formatTime(date) {
+				const year = date.getFullYear();
+				const month = String(date.getMonth() + 1).padStart(2, '0');
+				const day = String(date.getDate()).padStart(2, '0');
+				const hours = String(date.getHours()).padStart(2, '0');
+				const minutes = String(date.getMinutes()).padStart(2, '0');
+				return `${year}-${month}-${day} ${hours}:${minutes}`;
+			},
+			async update_page() {
+				const db = uniCloud.database();
+				let res = await db.collection('checkrecord').get();
+				let isSuccess = res.success;
+				let data = res.result.data;
 
+				const db2 = uniCloud.database();
+				let res2 = await db2.collection('login').get();
+				let isSuccess2 = res2.success;
+				let data2 = res2.result.data;
+
+				if (!isSuccess || !isSuccess2) {
+					uni.showToast({
+						icon: 'error',
+						title: '网络错误！'
+					});
+					return;
+				}
+
+				console.log(data);
+				console.log(data2);
+
+				let classSize = uni.getStorageSync('classsize');
+				let doneCount = 0;
+				let now = new Date();
+				let formatdate = this.formatTime(now).substr(0, 10);
+				this.daka = [];
+				let temparr = [];
+				// console.log("record");
+				for (let i = 0; i < data.length; i += 1) {
+					let record = data[i];
+					// console.log(record);
+					if (record.date == formatdate) {
+						this.daka.push({
+							"name": record.name,
+							"time": record.time
+						});
+						temparr.push({
+							"name": record.name,
+							"id": record.id
+						});
+						++doneCount;
+					}
+				}
+				let allarr = [];
+				for (let i = 0; i < data2.length; i += 1) {
+					let person = data2[i];
+					if (!person.admin)
+						allarr.push({
+							"name": person.name,
+							"id": person.id
+						});
+				}
+				this.totalData[0].val = classSize - doneCount;
+				this.totalData[1].val = ((classSize - doneCount) / classSize * 100).toFixed(0) + '%';
+
+				function isEqual(obj1, obj2) {
+					return obj1.name == obj2.name && obj1.id == obj2.id;
+				}
+
+				function findMissingObjects(S, T) {
+					const missingObjects = S.filter(objS => !T.some(objT => isEqual(objS, objT)));
+					return missingObjects;
+				}
+
+				this.notdaka = findMissingObjects(allarr, temparr);
+				// console.log("temparr");
+				// console.log(temparr);
+				// console.log("allarr");
+				// console.log(allarr);
+				// console.log("this.notdaka");
+				// console.log(this.notdaka);
+			},
 		},
-		onLoad() {
-			// 加载页面之前，对所有用户信息的打卡时间进行排序，把排名最高的放在前面
-			this.usersInfo.sort(function(a, b) {
-				var hour_a = a.dakaTime.substr(0, 1) * 10 + a.dakaTime.substr(1, 1);
-				var minute_a = a.dakaTime.substr(3, 1) * 10 + a.dakaTime.substr(4, 1);
-				var hour_b = b.dakaTime.substr(0, 1) * 10 + b.dakaTime.substr(1, 1);
-				var minute_b = b.dakaTime.substr(3, 1) * 10 + b.dakaTime.substr(4, 1);
-				hour_a = parseInt(hour_a);
-				minute_a = parseInt(minute_a);
-				hour_b = parseInt(hour_b);
-				minute_b = parseInt(minute_b);
-				return hour_a * 60 + minute_a - hour_b * 60 - minute_b;
-			})
+		onShow() {
+			this.update_page();
 		}
 	}
 </script>
@@ -86,7 +140,7 @@
 	.headContainer {
 		display: flex;
 		justify-content: space-between;
-		
+
 		width: 742rpx;
 		height: 350rpx;
 
@@ -113,11 +167,11 @@
 		display: flex;
 		justify-content: space-between;
 	}
-	
+
 	.headContainer .dataBlocks {
 		width: 340rpx;
 		height: 200rpx;
-	
+
 		line-height: 100rpx;
 		text-align: center;
 	}

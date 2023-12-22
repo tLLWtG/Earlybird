@@ -140,13 +140,14 @@
 						return;
 					}
 				}
+				uni.hideLoading()
 				uni.showToast({
 					icon: 'error',
 					title: '账号或密码错误'
 				});
 				this.islogin = false;
 				uni.setStorageSync("loginState", "");
-				uni.hideLoading()
+				
 			}
 		}
 	}

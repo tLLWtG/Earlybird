@@ -66,7 +66,7 @@
 					},
 					{
 						src: "../../static/graph-up.svg",
-						text: '月度打卡数据',
+						text: '历史数据汇总',
 						url: '/pages/administor/monthData'
 					}
 				],
@@ -101,10 +101,10 @@
 				this.islogin = false;
 		},
 		methods: {
-			// async delete() {
-			// 	const db = uniCloud.database();
-			// 	db.collection('checkrecord').doc('658444ff9755e3cdbf9ebe84').remove();
-			// }
+			async delete() {
+				const db = uniCloud.database();
+				db.collection('checkrecord').doc('65850bac213929458dd8c7da').remove();
+			}
 		}
 	}
 </script>

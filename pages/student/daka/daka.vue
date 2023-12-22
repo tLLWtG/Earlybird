@@ -125,7 +125,9 @@
 				//将打卡数据传回
 				uni.setStorageSync('dakaInfo', dakaRecord);
 				if (this.rank == '加载中') {
-					this.update_rank_percen();
+					setTimeout(function() {
+						this.update_rank_percen();
+					}.bind(this), 500);
 				}
 			}
 		},

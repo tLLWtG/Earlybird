@@ -43,6 +43,7 @@
 				let now = new Date();
 				let formatdate = this.formatTime(now).substr(0, 10);
 				console.log(data);
+				this.usersInfo = [];
 				for (let i = 0; i < data.length; i += 1) {
 					let record = data[i];
 					if (record.date == formatdate) {
