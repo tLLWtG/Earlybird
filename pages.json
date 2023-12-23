@@ -47,9 +47,9 @@
 			}
 		},
 		{
-			"path": "pages/administor/monthData",
+			"path": "pages/administor/historyData",
 			"style": {
-				"navigationBarTitleText": "月度数据",
+				"navigationBarTitleText": "历史数据",
 				"enablePullDownRefresh": true
 		
 			}

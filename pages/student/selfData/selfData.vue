@@ -56,7 +56,7 @@
 			},
 			async updateRecord() {
 				const db = uniCloud.database();
-				let res = await db.collection('checkrecord').get();
+				let res = await db.collection('checkrecord').limit(1000).get();
 				let isSuccess = res.success;
 				let data = res.result.data;
 				if (!isSuccess) {

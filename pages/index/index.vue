@@ -67,7 +67,7 @@
 					{
 						src: "../../static/graph-up.svg",
 						text: '历史数据汇总',
-						url: '/pages/administor/monthData'
+						url: '/pages/administor/historyData'
 					}
 				],
 				islogin: false,

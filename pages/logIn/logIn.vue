@@ -93,7 +93,7 @@
 					title: '登录中'
 				});
 				const db = uniCloud.database();
-				let res = await db.collection('login').get();
+				let res = await db.collection('login').limit(1000).get();
 				// console.log(res);
 				// console.log(res.success);
 				// console.log(res.result.data);

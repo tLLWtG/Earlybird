@@ -58,12 +58,12 @@
 			},
 			async update_page() {
 				const db = uniCloud.database();
-				let res = await db.collection('checkrecord').get();
+				let res = await db.collection('checkrecord').limit(1000).get();
 				let isSuccess = res.success;
 				let data = res.result.data;
 
 				const db2 = uniCloud.database();
-				let res2 = await db2.collection('login').get();
+				let res2 = await db2.collection('login').limit(1000).get();
 				let isSuccess2 = res2.success;
 				let data2 = res2.result.data;
 
