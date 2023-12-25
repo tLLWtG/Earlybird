@@ -1,9 +1,14 @@
 <template>
 	<view>
 		<view class="headContainer">今日打卡记录</view>
-		<view class="dataContainer" v-for="(item,index) in usersInfo">
+		<view class="topDataContainer" >
+			<view>0</view>
+			<view>{{usersInfo[0].userName}}</view>	 
+			<view>{{usersInfo[0].dakaTime}}</view>
+		</view>
+		<view class="dataContainer" v-for="(item,index) in usersInfo" v-if="index">
 			<view>{{index}}</view>
-			<view>{{item.userName}}</view>
+			<view>{{item.userName}}</view>	
 			<view>{{item.dakaTime}}</view>
 		</view>
 	</view>
@@ -82,9 +87,7 @@
 	.headContainer {
 		width: 742rpx;
 		height: 350rpx;
-
-		border: 2rpx solid black;
-		border-radius: 10rpx;
+		
 
 		line-height: 350rpx;
 		text-align: center;
@@ -105,6 +108,24 @@
 		padding: 0 30rpx;
 		margin: 15rpx auto;
 
+		display: flex;
+		justify-content: space-between;
+	}
+	.topDataContainer {
+		width: 683rpx;
+		height: 150rpx;
+	
+		border: 2rpx solid black;
+		border-radius: 10rpx;
+	
+		line-height: 150rpx;
+		text-align: center;
+		font-size: 40rpx;
+	
+		margin-bottom: 50rpx;
+		padding: 0 30rpx;
+		background-color: #F5F5DC;
+	
 		display: flex;
 		justify-content: space-between;
 	}
