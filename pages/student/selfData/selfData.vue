@@ -1,21 +1,25 @@
 <template>
 	<view>
-		<view class="subtitle">
-			过去七天历史记录统计
-		</view>
-		<view class="dataContainer">
-
-			<view class="dataBlocks" v-for="(item,index) in selfData">
-				<view>{{item.text}}</view>
-				<view>{{item.val}}</view>
+		<view v-if="!showRecord">
+			<view class="subtitle">
+				过去七天历史记录统计
 			</view>
+			<view class="dataContainer">
+				<view class="dataBlocks" v-for="(item,index) in selfData">
+					<view>{{item.text}}</view>
+					<view>{{item.val}}</view>
+				</view>
+			</view>
+			<button class = "buttons" @tap="clickButton">点击查看详细历史记录</button>
 		</view>
-		<view class="subtitle" style="text-align: left;">
-			完整历史记录
-		</view>
-		<view v-for="(item,index) in recordarr" :key="index">
-			<view>{{item.date}}</view>
-			<view>{{item.time}}</view>
+		<view class="selfRecords" v-if = showRecord :key="index">
+			<view class="recordBlocks"  v-for="(item,index) in recordarr">
+				<view style="margin: 0 40rpx;">{{item.date}}</view>
+				<view style="margin: 0 40rpx;">{{item.time}}</view>
+			</view>
+			<button style="background-color:  #F5F5DC; width:300rpx;height: 100rpx; line-height: 100rpx; text-align: center; font-size: 50rpx; margin: 50rpx auto;">
+				返回
+			</button>
 		</view>
 	</view>
 </template>
@@ -42,10 +46,19 @@
 					}
 				],
 				recordarr: [],
+				showRecord:false,
 				showid: ""
 			}
 		},
 		methods: {
+			clickButton()
+			{
+				this.showRecord = !this.showRecord;
+			},
+			clickReturn()
+			{
+				this.showRecord = !this.showRecord;
+			},
 			formatTime(date) {
 				const year = date.getFullYear();
 				const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -114,21 +127,37 @@
 </script>
 
 <style>
+	.selfRecords{
+		display: flex;
+		flex-direction: column;
+	}
+	.selfRecords .recordBlocks{
+		width:740rpx;
+		height: 150rpx;
+		
+		display: flex;
+		justify-content: space-between;
+		
+		line-height: 150rpx;
+		text-align: center;
+		font-size: 50rpx;
+	}
 	.subtitle {
 		width: 650rpx;
 		height: 150rpx;
 
+		/* border: solid 2rpx; */
 		margin: 50rpx auto;
 
-		line-height: 50rpx;
-		font-size: 30rpx;
+		line-height: 150rpx;
+		font-size: 50rpx;
 		text-align: center;
 	}
 
 	.dataContainer {
 		display: flex;
 		justify-content: space-around;
-		flex-wrap: wrap;
+		flex-wrap: wrap;	
 
 		width: 742rpx;
 		height: 500rpx;
@@ -147,5 +176,15 @@
 		line-height: 100rpx;
 		text-align: center;
 		font-size: 40rpx;
+	}
+	.buttons{
+		width: 650rpx;
+		height: 150rpx;
+		margin : 50rpx auto;
+		
+		line-height: 150rpx;
+		text-align: center;
+		font-size: 50rpx;
+		background-color:  #F5F5DC;
 	}
 </style>
