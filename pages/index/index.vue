@@ -34,9 +34,9 @@
 					<navigator :url='item.url' class="navigatorType"></navigator>
 				</view>
 				<view style="line-height: 30rpx; text-align: center; font-size: 40rpx;">{{item.text}}</view>
-			</view>
+			</view> 
 		</view>
-	</view>
+	</view> 
 </template>
 
 <script>

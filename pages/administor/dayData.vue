@@ -2,8 +2,8 @@
 	<view>
 		<view class="headContainer">
 			<view class="dataBlocks" v-for="(item,index) in totalData">
-				<view>{{item.text}}</view>
-				<view>{{item.val}}</view>
+				<view style="font-size: 50rpx; line-height: 130rpx;">{{item.text}}</view>
+				<view style="font-size: 50rpx; line-height: 130rpx;">{{item.val}}</view>
 			</view>
 		</view>
 		<!-- 这里要做一个可选的按钮，切换已打卡和未打卡的显示 -->
@@ -11,18 +11,20 @@
 		<!-- 这里要做一个可选的按钮，切换已打卡和未打卡的显示 -->
 		<!-- 这里要做一个可选的按钮，切换已打卡和未打卡的显示 -->
 		<!-- 这里要做一个可选的按钮，切换已打卡和未打卡的显示 -->
-		<view class="" style="text-align: left;">
-			已打卡名单
+		<view style="display: flex; justify-content: space-around;">
+			<view style="margin: 20rpx 0;" @tap="checkedTaped" :class="{actived: showRed}">
+				已打卡名单
+			</view>
+			<view style = "margin: 20rpx 0;" @tap="checkedTaped" :class="{actived: !showRed}">
+				未打卡名单
+			</view>
 		</view>
-		<view class="dataContainer" v-for="(item,index) in daka">
+		<view class="dataContainer" v-for="(item,index) in daka" v-if="showRed">
 			<view>{{index}}</view>
 			<view>{{item.name}}</view>
 			<view>{{item.time}}</view>
 		</view>
-		<view class="" style="text-align: left;">
-			未打卡名单
-		</view>
-		<view class="dataContainer" v-for="(item,index) in notdaka">
+		<view class="dataContainer" v-for="(item,index) in notdaka"  v-if="!showRed">
 			<view>{{index}}</view>
 			<view>{{item.name}}</view>
 			<view>{{item.id}}</view>
@@ -34,6 +36,7 @@
 	export default {
 		data() {
 			return {
+				showRed:1,
 				totalData: [{
 						text: '缺勤人数',
 						val: '加载中...'
@@ -48,6 +51,10 @@
 			}
 		},
 		methods: {
+			checkedTaped()
+			{
+				this.showRed = !this.showRed;
+			},
 			formatTime(date) {
 				const year = date.getFullYear();
 				const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -137,12 +144,15 @@
 </script>
 
 <style>
+	.actived{
+		color: coral;
+	}
 	.headContainer {
 		display: flex;
 		justify-content: space-between;
 
 		width: 742rpx;
-		height: 350rpx;
+		height: 300rpx;
 
 		border: 2rpx solid black;
 		border-radius: 10rpx;

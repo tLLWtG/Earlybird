@@ -17,7 +17,7 @@
 				<view style="margin: 0 40rpx;">{{item.date}}</view>
 				<view style="margin: 0 40rpx;">{{item.time}}</view>
 			</view>
-			<button style="background-color:  #F5F5DC; width:300rpx;height: 100rpx; line-height: 100rpx; text-align: center; font-size: 50rpx; margin: 50rpx auto;">
+			<button @click="clickReturn" style="background-color:  #F5F5DC; width:300rpx;height: 100rpx; line-height: 100rpx; text-align: center; font-size: 50rpx; margin: 50rpx auto;">
 				返回
 			</button>
 		</view>

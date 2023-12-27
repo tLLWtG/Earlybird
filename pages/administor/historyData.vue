@@ -1,12 +1,12 @@
 <template>
 	<view class="">
-		<view class="">
-			过去七天缺勤统计图。
+		<view style="margin: 30rpx auto; width: 300rpx; text-align: center;">
+			过去七天缺勤统计图
 		</view>
 		<view class="charts-box">
 			<qiun-data-charts type="column" :chartData="chartData" />
 		</view>
-		<view class="">
+		<view style="margin: 30rpx auto; width: 300rpx; text-align: center;">
 			学生缺勤详情
 		</view>
 		<view class="dataContainer" v-for="(item,index) in quearr">
