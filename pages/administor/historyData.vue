@@ -6,8 +6,16 @@
 		<view class="charts-box">
 			<qiun-data-charts type="column" :chartData="chartData" />
 		</view>
-		<view style="margin: 30rpx auto; width: 300rpx; text-align: center;">
+		<view style="margin: 30rpx auto; width: 300rpx; text-align: center; font-size: 40rpx;">
 			学生缺勤详情
+		</view>
+		<view style="display: flex; justify-content: center;">
+			<view style="display: flex; justify-content: space-between; width: 700rpx;">
+				<text style="font-size: 27rpx;">次序</text>
+				<text style="font-size: 27rpx;">姓名</text>
+				<text style="font-size: 27rpx;">&ensp;&ensp;&ensp;学号</text>
+				<text style="font-size: 27rpx;">缺勤次数</text>
+			</view>
 		</view>
 		<view class="dataContainer" v-for="(item,index) in quearr">
 			<view>{{index}}</view>
@@ -143,7 +151,7 @@
 	}
 
 	.dataContainer {
-		width: 683rpx;
+		width: 650rpx;
 		height: 150rpx;
 
 		border: 2rpx solid black;

@@ -6,11 +6,6 @@
 				<view style="font-size: 50rpx; line-height: 130rpx;">{{item.val}}</view>
 			</view>
 		</view>
-		<!-- 这里要做一个可选的按钮，切换已打卡和未打卡的显示 -->
-		<!-- 这里要做一个可选的按钮，切换已打卡和未打卡的显示 -->
-		<!-- 这里要做一个可选的按钮，切换已打卡和未打卡的显示 -->
-		<!-- 这里要做一个可选的按钮，切换已打卡和未打卡的显示 -->
-		<!-- 这里要做一个可选的按钮，切换已打卡和未打卡的显示 -->
 		<view style="display: flex; justify-content: space-around;">
 			<view style="margin: 20rpx 0;" @tap="checkedTaped" :class="{actived: showRed}">
 				已打卡名单
@@ -153,7 +148,7 @@
 
 		width: 742rpx;
 		height: 300rpx;
-
+		margin: 5rpx auto;
 		border: 2rpx solid black;
 		border-radius: 10rpx;
 

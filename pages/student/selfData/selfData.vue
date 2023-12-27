@@ -10,14 +10,18 @@
 					<view>{{item.val}}</view>
 				</view>
 			</view>
-			<button class = "buttons" @tap="clickButton">点击查看详细历史记录</button>
+			<button class="buttons" @tap="clickButton">点击查看详细历史记录</button>
 		</view>
-		<view class="selfRecords" v-if = showRecord :key="index">
-			<view class="recordBlocks"  v-for="(item,index) in recordarr">
-				<view style="margin: 0 40rpx;">{{item.date}}</view>
-				<view style="margin: 0 40rpx;">{{item.time}}</view>
+		<view class="selfRecords" v-if=showRecord :key="index">
+			<view class="" v-for="(item,index) in recordarr">
+				<view class="recordBlocks">
+					<view style="margin: 0 40rpx;">{{item.date}}</view>
+					<view style="margin: 0 40rpx;">{{item.time}}</view>
+				</view>
+				<view class="divider"></view>
 			</view>
-			<button @click="clickReturn" style="background-color:  #F5F5DC; width:300rpx;height: 100rpx; line-height: 100rpx; text-align: center; font-size: 50rpx; margin: 50rpx auto;">
+			<button @click="clickReturn"
+				style="background-color:  #F5F5DC; width:300rpx;height: 100rpx; line-height: 100rpx; text-align: center; font-size: 50rpx; margin: 50rpx auto;">
 				返回
 			</button>
 		</view>
@@ -46,17 +50,15 @@
 					}
 				],
 				recordarr: [],
-				showRecord:false,
+				showRecord: false,
 				showid: ""
 			}
 		},
 		methods: {
-			clickButton()
-			{
+			clickButton() {
 				this.showRecord = !this.showRecord;
 			},
-			clickReturn()
-			{
+			clickReturn() {
 				this.showRecord = !this.showRecord;
 			},
 			formatTime(date) {
@@ -127,21 +129,23 @@
 </script>
 
 <style>
-	.selfRecords{
+	.selfRecords {
 		display: flex;
 		flex-direction: column;
 	}
-	.selfRecords .recordBlocks{
-		width:740rpx;
+
+	.selfRecords .recordBlocks {
+		width: 740rpx;
 		height: 150rpx;
-		
+
 		display: flex;
 		justify-content: space-between;
-		
+
 		line-height: 150rpx;
 		text-align: center;
 		font-size: 50rpx;
 	}
+
 	.subtitle {
 		width: 650rpx;
 		height: 150rpx;
@@ -157,11 +161,11 @@
 	.dataContainer {
 		display: flex;
 		justify-content: space-around;
-		flex-wrap: wrap;	
+		flex-wrap: wrap;
 
 		width: 742rpx;
 		height: 500rpx;
-
+		margin: 25rpx auto;
 		border: 2rpx solid #000000;
 		border-radius: 10rpx;
 	}
@@ -172,19 +176,26 @@
 
 		margin: 30rpx auto;
 		border-radius: 10rpx;
-	
+
 		line-height: 100rpx;
 		text-align: center;
 		font-size: 40rpx;
 	}
-	.buttons{
+
+	.buttons {
 		width: 650rpx;
 		height: 150rpx;
-		margin : 50rpx auto;
-		
+		margin: 50rpx auto;
+
 		line-height: 150rpx;
 		text-align: center;
 		font-size: 50rpx;
-		background-color:  #F5F5DC;
+		background-color: #F5F5DC;
+	}
+
+	.divider {
+		background: #E0E3DA;
+		width: 100%;
+		height: 2rpx;
 	}
 </style>

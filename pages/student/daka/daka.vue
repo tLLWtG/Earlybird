@@ -1,6 +1,13 @@
 <template>
 	<view>
-		<view class="sentenceContainer">别卷了，快点回去睡觉（请在8:00前完成打卡）</view>
+		<view class="sentenceContainer">
+			<text style="display: block;">
+				别又睡过去了噢
+			</text>
+			<text style="display: block;">
+				（请在8:00前完成打卡）
+			</text>
+		</view>
 		<view class="dakaSuccessContainer">
 			<view>你已经在今日{{hour}} 打卡成功</view>
 		</view>
@@ -68,14 +75,16 @@
 				let doneCount = 0;
 				let now = new Date();
 				let formatdate = this.formatTime(now).substr(0, 10);
-				let formattime = this.formatTime(now).substr(11, 5);
-				for (let i = 0; i < data.length; i += 1) {
-					let record = data[i];
+				let formattime = "";
+				for (let record of data)
+					if (record.date == formatdate && record.id == this.showid)
+						formattime = record.time;
+				for (let record of data) {
 					if (record.date == formatdate && formattime >= record.time)
 						++doneCount;
 				}
 				this.rank = doneCount;
-				this.percent = doneCount / classSize * 100;
+				this.percent = (classSize - doneCount) / classSize * 100;
 			},
 			async add_record() {
 				let now = new Date();
@@ -148,7 +157,7 @@
 		border-radius: 10rpx;
 		height: 500rpx;
 		width: 742rpx;
-
+		margin: 25rpx auto;
 		line-height: 140rpx;
 		text-align: center;
 		font-size: 50rpx;

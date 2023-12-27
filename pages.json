@@ -2,7 +2,7 @@
 	"pages": [{
 			"path": "pages/index/index",
 			"style": {
-				"navigationBarTitleText": "打卡首页"
+				"navigationBarTitleText": "首页"
 			}
 		},
 		{
@@ -71,7 +71,7 @@
 	"tabBar": {
 		"list": [{
 				"pagePath": "pages/index/index",
-				"text": "打卡首页",
+				"text": "首页",
 				"iconPath": "static/首页.png",
 				"selectedIconPath": "static/首页.png"
 			},

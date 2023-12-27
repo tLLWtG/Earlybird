@@ -1,14 +1,29 @@
 <template>
 	<view>
-		<view class="headContainer">今日打卡记录</view>
-		<view class="topDataContainer" >
-			<view>0</view>
-			<view>{{usersInfo[0].userName}}</view>	 
-			<view>{{usersInfo[0].dakaTime}}</view>
+		<view class="headContainer">打卡排名</view>
+		<view class="">
+			您的打卡记录
 		</view>
+		<view style="margin: 15rpx auto;display: flex; width: 100%; justify-content: center;">
+			<view class="topDataContainer" style="justify-content: center;">
+				<view style="display: flex; justify-content: space-between; width: 400rpx;">
+					<view>{{usersInfo[0].userName}}</view>
+					<view>{{usersInfo[0].dakaTime}}</view>
+				</view>
+			</view>
+		</view>
+
+		<view style="display: flex; justify-content: center;">
+			<view style="display: flex; justify-content: space-between; width: 700rpx;">
+				<text>名次</text>
+				<text>姓名</text>
+				<text>打卡时间</text>
+			</view>
+		</view>
+
 		<view class="dataContainer" v-for="(item,index) in usersInfo" v-if="index">
 			<view>{{index}}</view>
-			<view>{{item.userName}}</view>	
+			<view>{{item.userName}}</view>
 			<view>{{item.dakaTime}}</view>
 		</view>
 	</view>
@@ -88,7 +103,7 @@
 	.headContainer {
 		width: 742rpx;
 		height: 350rpx;
-		
+
 
 		line-height: 350rpx;
 		text-align: center;
@@ -96,7 +111,7 @@
 	}
 
 	.dataContainer {
-		width: 683rpx;
+		width: 650rpx;
 		height: 150rpx;
 
 		border: 2rpx solid black;
@@ -112,21 +127,22 @@
 		display: flex;
 		justify-content: space-between;
 	}
+
 	.topDataContainer {
-		width: 683rpx;
+		width: 650rpx;
 		height: 150rpx;
-	
+
 		border: 2rpx solid black;
 		border-radius: 10rpx;
-	
+
 		line-height: 150rpx;
 		text-align: center;
 		font-size: 40rpx;
-	
+
 		margin-bottom: 50rpx;
 		padding: 0 30rpx;
 		background-color: #F5F5DC;
-	
+
 		display: flex;
 		justify-content: space-between;
 	}

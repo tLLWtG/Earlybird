@@ -1,13 +1,13 @@
 <template>
 	<view>
-		<image class="backgroundImage" src="/static/shangxiang.gif"></image>
-		<view class="titleContainer" style="font-size: 50rpx;">上电子香火，积赛博功德</view>
+		<image class="backgroundImage" src="/static/shangxiangnew.gif"></image>
+		<view class="titleContainer" style="font-size: 50rpx; font-weight: 600;">上电子香火，积赛博功德</view>
 		<view class="luckContainer" :hidden="luckActive">
 			<view class="lineContainer" style="line-height: 10vh;">【今日人品】{{jrrp}}</view>
-			<view class="lineContainer" style="line-height: 10vh;">【宜】{{yi}}</view>
-			<view class="lineContainer" style="line-height: 10vh;">【宜】{{yi2}}</view>
-			<view class="lineContainer" style="line-height: 10vh;">【忌】{{ji}}</view>
-			<view class="lineContainer" style="line-height: 10vh;">【忌】{{ji2}}</view>
+			<view class="lineContainer" style="line-height: 7vh;">【宜】{{yi}}</view>
+			<view class="lineContainer" style="line-height: 7vh;">【宜】{{yi2}}</view>
+			<view class="lineContainer" style="line-height: 7vh;">【忌】{{ji}}</view>
+			<view class="lineContainer" style="line-height: 7vh;">【忌】{{ji2}}</view>
 			<button style="width: 400rpx height:30rpx;" @click="clickButtonReturn">返回</button>
 		</view>
 		<button class="buttons" @click="clickButtonQiuqian">上香</button>
@@ -180,9 +180,11 @@
 		width: 600rpx;
 		height: 60vh;
 
-		background-color: aliceblue;
-		border-radius: 10rpx;
-
+		background-color: #cde3ff;
+		border-radius: 20rpx;
+		border-color: #000000;
+		border-width: 5rpx;
+		border-style: groove;
 		display: flex;
 		flex-direction: column;
 		align-items: flex-start;
@@ -190,7 +192,7 @@
 	}
 
 	.lineContainer {
-		width: 600rpx;
+		width: 550rpx;
 
 		margin-left: 30rpx;
 

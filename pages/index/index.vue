@@ -103,7 +103,7 @@
 		methods: {
 			async delete() {
 				const db = uniCloud.database();
-				db.collection('checkrecord').doc('65850bac213929458dd8c7da').remove();
+				db.collection('checkrecord').doc('658bff0f213929458de291cb').remove();
 			}
 		}
 	}
