@@ -9,8 +9,8 @@ This is a "check in morning" Wechat Mini Program based on uni-app.
 ## Developer Team
 
 Here are the members of Half Team(半个队):
-* tllwtg
-* Corgi inequality
+* [tllwtg](https://github.com/tLLWtG)
+* [Corgi inequality](https://github.com/xmu22)
 > Names are in no particular order.
 
 ## License
