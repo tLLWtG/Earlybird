@@ -1,6 +1,6 @@
 # Earlybird
 
-A "check in morning" Wechat Mini Program based on uni-app.
+This is a "check in morning" Wechat Mini Program based on uni-app.
 
 这是一个“早起打卡”微信小程序，基于 uni-app 框架编写。
 
