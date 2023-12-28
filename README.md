@@ -4,6 +4,8 @@ A "check in morning" Wechat Mini Program based on uni-app.
 
 这是一个“早起打卡”微信小程序，基于 uni-app 框架编写。
 
+➡ [Earlybird 项目总结](https://github.com/tLLWtG/Earlybird/blob/main/doc/Earlybird项目总结.pdf)
+
 ## Developer Team
 
 Here are the members of Half Team(半个队):
