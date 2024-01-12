@@ -67,7 +67,7 @@ This is a "check in morning" Wechat Mini Program based on uni-app.
      }
      ```
 
-5. 下面是几条表中数据的样例
+5. 下面是几条表中数据的样例：
 
    * login 表中的学生数据
 
@@ -116,7 +116,6 @@ This is a "check in morning" Wechat Mini Program based on uni-app.
 因此在测试时请注意：
 
 * 每次登录不同的账号前请**将小程序模拟器的缓存完全清空**。
-
 * **不在清除小程序缓存后登录同一账号再次打卡**。
 > 若确实需要多次登录同一账号打卡，请先在云数据库中手动将此账号今天的打卡记录删除。
 
