@@ -69,15 +69,25 @@
 					if (record.date == formatdate) {
 						this.usersInfo.push({
 							"userName": record.name,
-							"dakaTime": record.time
+							"dakaTime": record.time,
+							"userId": record.id
 						});
 						if (record.id == this.showid) {
 							this.usersInfo.unshift({
-								"userName": record.name,
-								"dakaTime": record.time
+								"userName": "您",
+								"dakaTime": record.time,
+								"userId": record.id
 							});
 						}
 					}
+				}
+				if (this.usersInfo.length == 0 || this.usersInfo[0].userId != this.showid)
+				{
+					this.usersInfo.unshift({
+						"userName": "您",
+						"dakaTime": "未打卡",
+						"userId": this.showid
+					});
 				}
 			}
 		},
